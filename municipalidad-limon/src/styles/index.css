@@ -1,4 +1,7 @@
 :root {
+  --font-heading: 'Public Sans', sans-serif;
+  --font-body: 'Clear Sans', sans-serif;
+  --font-special: 'Flatory Sans', sans-serif;
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;

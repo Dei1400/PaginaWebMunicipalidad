@@ -6,10 +6,10 @@ import Container from '../ui/Container';
 const navigationItems = [
   { label: 'Inicio', path: '/' },
   { label: 'Servicios', path: '/servicios' },
-  { label: 'Municipalidad', path: '/municipalidad' },
-  { label: 'Transparencia', path: '/transparencia' },
-  { label: 'Noticias', path: '/noticias' },
-  { label: 'Contacto', path: '/contacto' },
+  { label: 'Tramites', path: '/Tramites' },
+  { label: 'Gobierno', path: '/Gobierno' },
+  { label: 'Cantón', path: '/Cantón' },
+  { label: 'Transparencia', path: '/Transparencia' },
 ];
 
 function Navbar() {
