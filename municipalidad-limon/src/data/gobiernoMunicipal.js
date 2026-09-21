@@ -1,62 +1,143 @@
 // src/data/gobiernoMunicipal.js
 
-export const gobiernoSecciones = [
-  {
-    slug: 'alcaldia',
-    titulo: 'Alcaldía',
-    resumen: 'Quién dirige la administración municipal, sus funciones, equipo de despacho y canales de contacto.',
-    contenido: [
-      'La Alcaldía es el órgano ejecutivo de la Municipalidad de Limón. Es responsable de la administración general, el presupuesto y las obras cantonales, e incluye el despacho, el gabinete de directores y el canal de contacto institucional.',
-      'La Alcaldesa Municipal en el período vigente es la Licda. Ana Janniel Matarrita McCalla.',
-      'Contacto: Central telefónica 2758-4444, correo alcaldia@municlimon.go.cr, sitio web municlimon.go.cr.',
-    ],
-  },
-  {
-    slug: 'vicealcaldias',
-    titulo: 'Vicealcaldías',
-    resumen: 'Presentación de las vicealcaldías, sus funciones, áreas delegadas y programas relacionados.',
-    contenido: [
-      'La 1.ª Vicealcaldía asume las funciones ejecutivas delegadas (proyectos sociales, área comunitaria y cultural) y la sustitución temporal de la Alcaldía. La 2.ª Vicealcaldía apoya los planes estratégicos de desarrollo.',
-      '1.ª Vicealcaldía: Lic. John Gutiérrez Gómez.',
-      '2.ª Vicealcaldía: Katerine Calvo Lobo.',
-    ],
-  },
-  {
-    slug: 'consejo-municipal',
-    titulo: 'Concejo Municipal',
-    resumen: 'Quiénes integran el Concejo, qué decide, cuándo sesiona y cómo consultar actas, acuerdos y comisiones.',
-    contenido: [
-      'El Concejo Municipal es el órgano deliberativo y legislativo local, compuesto por regidoras, regidores, síndicas y síndicos de los distritos del cantón. Se encarga de aprobar reglamentos, presupuesto y acuerdos municipales.',
-      'Presidencia del Concejo Municipal (período vigente): Juan Pablo Poveda Chinchilla.',
-      'En esta sección podrá consultar la conformación actual del Concejo, el detalle de cada puesto y el acceso a actas, acuerdos y comisiones municipales.',
-    ],
-  },
-  {
-    slug: 'secretaria-consejo',
-    titulo: 'Secretaría del Concejo',
-    resumen: 'Funciones de la Secretaría, contacto, solicitudes relacionadas y acceso a documentos del Concejo.',
-    contenido: [
-      'La Secretaría del Concejo Municipal es la oficina encargada de la redacción, custodia, notificación y publicación de las actas y acuerdos tomados por el Concejo.',
-      'A través de esta oficina la ciudadanía puede solicitar certificaciones de acuerdos, dar seguimiento a gestiones presentadas ante el Concejo y acceder a los documentos públicos generados en las sesiones.',
-    ],
-  },
-  {
-    slug: 'sesiones-municipales',
-    titulo: 'Sesiones municipales',
-    resumen: 'Calendario de sesiones ordinarias y extraordinarias, y transmisión por canales oficiales.',
-    contenido: [
-      'Esta sección es una plataforma de consulta con el calendario de sesiones ordinarias y extraordinarias del Concejo Municipal, además de los enlaces de transmisión en vivo por los canales oficiales.',
-    ],
-  },
-  {
-    slug: 'periodos-anteriores',
-    titulo: 'Períodos anteriores',
-    resumen: 'Información histórica de autoridades, integración del Concejo y documentación de períodos pasados.',
-    contenido: [
-      'Esta sección reúne la memoria institucional del cantón, permitiendo consultar la integración de las autoridades que han dirigido la Municipalidad de Limón en cuadrenios pasados, así como sus rendiciones de cuentas finales.',
-      'Cuadrenio 2020–2024: Alcalde Néstor Mattis Williams; Primera Vicealcaldesa Ana Janniel Matarrita McCalla; Segundo Vicealcalde Shafton Delroy Chambers. El Concejo Municipal estuvo integrado por 9 regidores propietarios y 9 suplentes.',
-      'Cuadrenio 2016–2020: Alcalde Néstor Mattis Williams; Primera Vicealcaldesa Cintia Small Sánchez; Segundo Vicealcalde Raymond Smith Smith. El Concejo Municipal estuvo conformado por las representaciones distritales de los 4 distritos del cantón (Limón centro, Valle La Estrella, Río Blanco y Matama).',
-      'Archivo de documentos históricos: repositorio de actas y acuerdos municipales desde 2010 a la fecha, además de las memorias e informes de fin de mandato de cada administración.',
-    ],
-  },
+import fotoAna from '../assets/imagenes/Ana.png';
+import fotoJohn from '../assets/imagenes/John.png';
+import fotoKaterine from '../assets/imagenes/Katerine.png';
+import fotoJuan from '../assets/imagenes/Juan.png';
+
+export const navGobierno = [
+  { slug: 'alcaldia', titulo: 'Alcaldía' },
+  { slug: 'vicealcaldias', titulo: 'Vicealcaldías' },
+  { slug: 'consejo-municipal', titulo: 'Concejo Municipal' },
+  { slug: 'secretaria-consejo', titulo: 'Secretaría del Concejo' },
+  { slug: 'sesiones-municipales', titulo: 'Sesiones municipales' },
+  { slug: 'periodos-anteriores', titulo: 'Períodos anteriores' },
 ];
+
+export const alcaldia = {
+  descripcion: [
+    'La Alcaldía es el órgano ejecutivo de la Municipalidad de Limón. Es responsable de la administración general, el presupuesto y las obras cantonales.',
+  ],
+  persona: {
+    nombre: 'Ana Janniel Matarrita McCalla',
+    cargo: 'Alcaldesa Municipal',
+    foto: fotoAna,
+  },
+  funciones: [
+    'Dirigir la administración general y el presupuesto municipal',
+    'Ejecutar los acuerdos del Concejo Municipal',
+    'Representar legalmente al cantón ante otras instituciones',
+  ],
+  contacto: {
+    telefono: '2758-4444',
+    correo: 'alcaldia@municlimon.go.cr',
+    web: 'municlimon.go.cr',
+  },
+};
+
+export const vicealcaldias = {
+  descripcion: [
+    'La 1.ª Vicealcaldía asume las funciones ejecutivas delegadas (proyectos sociales, área comunitaria y cultural) y la sustitución temporal de la Alcaldía. La 2.ª Vicealcaldía apoya los planes estratégicos de desarrollo.',
+  ],
+  personas: [
+    { nombre: 'John Gutiérrez Gómez', cargo: '1.ª Vicealcaldía', foto: fotoJohn },
+    { nombre: 'Katerine Calvo Lobo', cargo: '2.ª Vicealcaldía', foto: fotoKaterine },
+  ],
+};
+
+export const concejoMunicipal = {
+  temas: [
+    {
+      pregunta: 'Quiénes lo integran',
+      respuesta:
+        'El Concejo Municipal está integrado por 9 regidores propietarios, sus respectivos suplentes, y síndicas y síndicos de los distritos del cantón.',
+    },
+    {
+      pregunta: 'Qué decide',
+      respuesta:
+        'Aprueba reglamentos, el presupuesto municipal y los acuerdos que rigen la gestión del cantón, además de fiscalizar la administración.',
+    },
+    {
+      pregunta: 'Cuándo sesiona',
+      respuesta:
+        'Sesiona de forma ordinaria cada semana, y de forma extraordinaria cuando la agenda cantonal lo requiere.',
+    },
+    {
+      pregunta: 'Cómo consultar actas y acuerdos',
+      respuesta:
+        'Las actas y acuerdos pueden solicitarse a través de la Secretaría del Concejo Municipal.',
+    },
+  ],
+  presidencia: {
+    nombre: 'Juan Pablo Poveda Chinchilla',
+    cargo: 'Presidente del Concejo Municipal',
+    foto: fotoJuan,
+  },
+  regidores: [
+    {
+      partido: 'Partido Unidos Podemos',
+      nombres: [
+        'Juan Pablo Poveda Chinchilla (Presidente)',
+        'Katerine Calvo Lobo (Vicepresidenta)',
+        'Orin George Grant Ebanks',
+      ],
+    },
+    {
+      partido: 'Partido Auténtico Limonense',
+      nombres: ['Dwayne Kareem Mattis Pinnock', 'Yahuzu Acuña Martínez'],
+    },
+    {
+      partido: 'Partido Liberación Nacional',
+      nombres: ['José Ramón Retana Cerdas', 'Laura Elicena Mora Knight'],
+    },
+    {
+      partido: 'Partido Justicia Social Costarricense',
+      nombres: ['Keyvin Paul Ramírez Quesada'],
+    },
+    {
+      partido: 'Partido Aquí Costa Rica Manda',
+      nombres: ['José Luis Vásquez Mora'],
+    },
+  ],
+};
+
+export const secretariaConsejo = {
+  descripcion: [
+    'La Secretaría del Concejo Municipal es la oficina encargada de la redacción, custodia, notificación y publicación de las actas y acuerdos tomados por el Concejo.',
+  ],
+  pasos: [
+    { numero: 1, texto: 'Presenta tu solicitud por escrito indicando el acuerdo o acta que necesitas.' },
+    { numero: 2, texto: 'La Secretaría revisa la solicitud y localiza el documento en el archivo.' },
+    { numero: 3, texto: 'Recibe la certificación o copia del documento solicitado.' },
+  ],
+};
+
+export const sesionesMunicipales = {
+  descripcion: [
+    'Consulte el calendario de sesiones ordinarias y extraordinarias del Concejo Municipal.',
+  ],
+  calendario: [
+    { tipo: 'Ordinaria', dia: 'Por confirmar', hora: 'Por confirmar' },
+    { tipo: 'Extraordinaria', dia: 'Según convocatoria', hora: '—' },
+  ],
+  transmision: 'https://youtube.com/@municlimon',
+};
+
+export const periodosAnteriores = {
+  cuadrenios: [
+    {
+      periodo: '2020–2024',
+      alcalde: 'Néstor Mattis Williams',
+      vicealcaldias: 'Ana Janniel Matarrita McCalla (1.ª), Shafton Delroy Chambers (2.º)',
+      concejo: '9 regidores propietarios y 9 suplentes',
+    },
+    {
+      periodo: '2016–2020',
+      alcalde: 'Néstor Mattis Williams',
+      vicealcaldias: 'Cintia Small Sánchez (1.ª), Raymond Smith Smith (2.º)',
+      concejo: 'Representación de los 4 distritos (Limón centro, Valle La Estrella, Río Blanco, Matama)',
+    },
+  ],
+  archivo:
+    'Repositorio de actas y acuerdos municipales desde 2010 a la fecha, y memorias e informes de fin de mandato de cada administración.',
+};

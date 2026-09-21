@@ -1,7 +1,30 @@
 .gobierno__intro {
   color: var(--color-text-secondary);
   max-width: 65ch;
+  margin-bottom: var(--space-5);
+}
+
+.gobierno__vision-mision {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
   margin-bottom: var(--space-6);
+}
+
+.gobierno__vision-mision > div {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.gobierno__vision-mision h4 {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+}
+
+.gobierno__vision-mision p {
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 .gobierno__nav-list {
@@ -41,7 +64,235 @@
   color: var(--color-text-secondary);
 }
 
+/* Tarjeta de autoridad (foto + texto) */
+.gobierno__autoridad {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+}
+
+.gobierno__autoridad-foto {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.gobierno__autoridad-iniciales {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.gobierno__autoridad-nombre {
+  font-weight: 700;
+  margin: 0 0 var(--space-1);
+  color: var(--color-text);
+}
+
+.gobierno__autoridad-cargo {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.gobierno__autoridades-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+/* Checklist */
+.gobierno__checklist {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+}
+
+.gobierno__checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
+.gobierno__check {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Acordeón */
+.gobierno__acordeon {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+  overflow: hidden;
+}
+
+.gobierno__acordeon-item + .gobierno__acordeon-item {
+  border-top: 1px solid var(--color-border);
+}
+
+.gobierno__acordeon-pregunta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-white);
+  border: none;
+  font-weight: 600;
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+
+.gobierno__acordeon-respuesta {
+  padding: 0 var(--space-4) var(--space-4);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Pasos numerados */
+.gobierno__pasos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.gobierno__paso {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.gobierno__paso-numero {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+/* Tabla de sesiones */
+.gobierno__tabla-wrap {
+  margin-bottom: var(--space-5);
+}
+
+.gobierno__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-4);
+}
+
+.gobierno__tabla th,
+.gobierno__tabla td {
+  text-align: left;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gobierno__tabla th {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.gobierno__transmision {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+/* Línea de tiempo */
+.gobierno__timeline {
+  margin-bottom: var(--space-5);
+}
+
+.gobierno__timeline-item {
+  display: flex;
+  gap: var(--space-3);
+  position: relative;
+  padding-bottom: var(--space-5);
+}
+
+.gobierno__timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--color-border);
+}
+
+.gobierno__timeline-punto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.gobierno__timeline-periodo {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-2) !important;
+}
+
+/* Regidores por partido */
+.gobierno__regidores {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.gobierno__partido {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.gobierno__partido-nombre {
+  font-weight: 700;
+  margin: 0 0 var(--space-2);
+  color: var(--color-primary);
+}
+
+.gobierno__partido ul {
+  margin: 0;
+  padding-left: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
 @media (min-width: 768px) {
+  .gobierno__vision-mision,
+  .gobierno__autoridades-grid,
+  .gobierno__regidores {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gobierno__pasos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .gobierno__nav-list {
     flex-direction: row;
     flex-wrap: wrap;
