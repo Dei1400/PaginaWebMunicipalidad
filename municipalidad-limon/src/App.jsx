@@ -2,6 +2,7 @@
 
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
+import Gobierno from './pages/gobiernoMunicipal';
 
 function Home() {
   return <h1>Inicio</h1>;
@@ -15,8 +16,13 @@ function Transparencia() {
   return <h1>Transparencia</h1>;
 }
 
+function Tramites() {
+  return <h1>Trámites</h1>;
+}
 
-
+function Canton() {
+  return <h1>Cantón</h1>;
+}
 
 function App() {
   return (
