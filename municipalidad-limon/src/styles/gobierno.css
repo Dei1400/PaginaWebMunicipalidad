@@ -190,6 +190,7 @@
 /* Tabla de sesiones */
 .gobierno__tabla-wrap {
   margin-bottom: var(--space-5);
+  overflow-x: auto
 }
 
 .gobierno__tabla {
