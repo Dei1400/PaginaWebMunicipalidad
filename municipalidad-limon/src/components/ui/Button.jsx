@@ -1,4 +1,4 @@
-// src/components/ui/Button.jsx
+import './Button.css';
 
 function Button({
   children,
@@ -6,11 +6,12 @@ function Button({
   variant = 'primary',
   onClick,
   disabled = false,
+  className = '',
 }) {
   return (
     <button
       type={type}
-      className={`button button--${variant}`}
+      className={`button button--${variant} ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
@@ -19,4 +20,4 @@ function Button({
   );
 }
 
-export default Button;
+export default Button;  

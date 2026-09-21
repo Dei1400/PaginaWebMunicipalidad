@@ -33,3 +33,11 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Flatory Sans';
+  src: url('../assets/fonts/flatory-sans/Flatory-sans-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
