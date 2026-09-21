@@ -10,6 +10,7 @@ function Gobierno() {
   const seccion = gobiernoSecciones.find((s) => s.slug === activo);
 
   return (
+    
     <Section title="Gobierno Municipal" className="gobierno">
       <p className="gobierno__intro">
         Conozca la estructura de gobierno de la Municipalidad de Limón: quién
@@ -39,13 +40,6 @@ function Gobierno() {
         {seccion.contenido.map((parrafo, i) => (
           <p key={i}>{parrafo}</p>
         ))}
-        {seccion.contacto && (
-          <div className="gobierno__contacto">
-            <h4>Contacto</h4>
-            {seccion.contacto.telefono && <p>Teléfono: {seccion.contacto.telefono}</p>}
-            {seccion.contacto.correo && <p>{seccion.contacto.correo}</p>}
-          </div>
-        )}
       </article>
     </Section>
   );

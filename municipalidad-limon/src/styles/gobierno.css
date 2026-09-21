@@ -41,13 +41,6 @@
   color: var(--color-text-secondary);
 }
 
-.gobierno__contacto {
-  margin-top: var(--space-5);
-  padding: var(--space-4);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
-}
-
 @media (min-width: 768px) {
   .gobierno__nav-list {
     flex-direction: row;

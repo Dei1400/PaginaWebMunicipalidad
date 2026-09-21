@@ -10,7 +10,6 @@ export const gobiernoSecciones = [
       'El despacho de la Alcaldía está conformado por la persona alcaldesa o alcalde titular y las vicealcaldías de apoyo. [Nombre de la persona alcaldesa/alcalde] encabeza la administración durante el período vigente.',
       'Entre sus principales informes a la ciudadanía se encuentran el informe de labores anual, los informes de gestión y los planes municipales, disponibles para consulta y descarga en esta sección.',
     ],
-    contacto: { telefono: '2758-4444', correo: 'alcaldia@municlimon.go.cr' },
   },
   {
     slug: 'vicealcaldias',
@@ -40,7 +39,6 @@ export const gobiernoSecciones = [
       'La Secretaría del Concejo Municipal es la dependencia encargada de levantar las actas de las sesiones, tramitar la correspondencia dirigida al Concejo y custodiar los acuerdos y documentos oficiales.',
       'A través de esta oficina la ciudadanía puede solicitar certificaciones de acuerdos, dar seguimiento a gestiones presentadas ante el Concejo y acceder a los documentos públicos generados en las sesiones.',
     ],
-    contacto: { telefono: '2758-4444', correo: 'secretariaconcejo@municlimon.go.cr' },
   },
   {
     slug: 'sesiones-municipales',
