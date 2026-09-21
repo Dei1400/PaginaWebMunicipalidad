@@ -1,0 +1,41 @@
+.header {
+  background-color: var(--color-white);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 80px;
+
+  gap: var(--space-5);
+}
+
+.header__brand {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.header__title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .header__content {
+    min-height: 64px;
+  }
+
+  .header__title {
+    font-size: var(--font-size-h4);
+  }
+}
