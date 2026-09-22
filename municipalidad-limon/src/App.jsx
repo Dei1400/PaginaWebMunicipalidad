@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Layout from './components/layout/Layout';
 import Home from './features/home/Home';
+import Tramites from './features/tramites/Tramites';
 
 function Servicios() {
   return <h1>Servicios</h1>;
@@ -25,10 +26,11 @@ function Contacto() {
 
 function App() {
   return (
-    <Layout>
+    <Layout>  
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
+        <Route path="/tramites" element={<Tramites />} />
         <Route path="/municipalidad" element={<Municipalidad />} />
         <Route path="/transparencia" element={<Transparencia />} />
         <Route path="/noticias" element={<Noticias />} />
