@@ -1,0 +1,78 @@
+.tramites {
+  background: var(--color-surface);
+}
+
+.tramites__intro {
+  padding-bottom: var(--space-8);
+}
+
+.tramites__eyebrow {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tramites__intro h2 {
+  margin-bottom: var(--space-3);
+}
+
+.tramites__lead {
+  max-width: 680px;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-secondary);
+}
+
+.tramites__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.tramites__card {
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+}
+
+.tramites__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-support);
+  font-size: 1.5rem;
+}
+
+.tramites__card h3 {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-h4);
+}
+
+.tramites__card p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.tramites__link {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .tramites__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .tramites__grid {
+    grid-template-columns: 1fr;
+  }
+}
