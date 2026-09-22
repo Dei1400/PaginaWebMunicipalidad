@@ -1,3 +1,4 @@
+
 import Card from '../../components/ui/Card';
 import Link from '../../components/ui/Link';
 import Alert from '../../components/ui/Alert';
@@ -39,44 +40,152 @@ function Home() {
   return (
     <div className="home">
 
-      <section className="home__hero">
+    <section className="home__hero">
+      <div className="home__hero-overlay">
         <div className="container">
           <div className="home__hero-content">
+            <div className="home__brand">
+              <div className="home__brand-mark" aria-hidden="true">
+                ML
+              </div>
 
-            <p className="home__eyebrow">
-              Municipalidad de Limón
-            </p>
-
-            <h1>
-              Servicios e información
-              <br />
-              para la comunidad
-            </h1>
-
-            <p className="home__hero-description">
-              Encuentre trámites, servicios, información
-              municipal y canales de contacto.
-            </p>
-
-            <div className="home__hero-actions">
-              <Link
-                to="/servicios"
-                variant="arrow"
-              >
-                Ver servicios
-              </Link>
-
-              <Link
-                to="/tramites"
-                variant="subtle"
-              >
-                Consultar trámites
-              </Link>
+              <div className="home__brand-name">
+                <span>Municipalidad de</span>
+                <strong>Limón</strong>
+              </div>
             </div>
 
+
+
+            <form className="home__search">
+              <label
+                htmlFor="home-search"
+                className="home__search-label"
+              >
+                Buscar en el sitio
+              </label>
+
+              <div className="home__search-group">
+                <input
+                  id="home-search"
+                  type="search"
+                  placeholder="¿Qué necesita encontrar?"
+                  aria-label="Buscar en el sitio"
+                />
+
+                <button type="submit">
+                  Buscar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="home__featured">
+            <div className="home__featured-heading">
+              <span>Accesos rápidos</span>
+            </div>
+
+            <div className="home__featured-grid">
+              <Link
+                to="/servicios/urbano"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  ♻
+                </span>
+
+                <span className="home__featured-title">
+                  Servicios urbanos
+                </span>
+              </Link>
+
+              <Link
+                to="/servicios/ambiente"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  ◉
+                </span>
+
+                <span className="home__featured-title">
+                  Ambiente
+                </span>
+              </Link>
+
+              <Link
+                to="/tramites/impuestos-pagos"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  ₡
+                </span>
+
+                <span className="home__featured-title">
+                  Impuestos y pagos
+                </span>
+              </Link>
+
+              <Link
+                to="/tramites/patentes"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  ▣
+                </span>
+
+                <span className="home__featured-title">
+                  Patentes
+                </span>
+              </Link>
+
+              <Link
+                to="/tramites/formularios"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  □
+                </span>
+
+                <span className="home__featured-title">
+                  Formularios
+                </span>
+              </Link>
+
+              <Link
+                to="/la-municipalidad/contacto"
+                className="home__featured-card"
+              >
+                <span
+                  className="home__featured-icon"
+                  aria-hidden="true"
+                >
+                  ☎
+                </span>
+
+                <span className="home__featured-title">
+                  Contacto
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <section className="section">
         <div className="container">
