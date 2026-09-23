@@ -98,11 +98,11 @@
 }
 
 .transparency__overview-list div:nth-child(2) {
-  border-top-color: var(--color-secondary);
+  border-top-color: var(--color-primary);
 }
 
 .transparency__overview-list div:nth-child(3) {
-  border-top-color: var(--color-accent);
+  border-top-color: var(--color-primary);
 }
 
 .transparency__overview-list dt {
