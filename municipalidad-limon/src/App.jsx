@@ -15,10 +15,6 @@ function Municipalidad() {
   return <h1>Municipalidad</h1>;
 }
 
-function Transparencia() {
-  return <h1>Transparencia</h1>;
-}
-
 
 function Noticias() {
   return <h1>Noticias</h1>;
