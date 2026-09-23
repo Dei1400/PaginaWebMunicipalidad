@@ -2,12 +2,21 @@ import { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import { cantonCategories } from '../../data/canton';
 import historiaFondo from '../../assets/imagenes/rioblanco.jpg';
-import geografiaFondo from '../../assets/imagenes/valle.jpg';
+import geografiaFondo from '../../assets/imagenes/costa.jpg';
+import turismoFondo from '../../assets/imagenes/crucero.jpg';
+import patrimonioFondo from '../../assets/imagenes/parque.jpg';
+import culturaFondo from '../../assets/imagenes/iglesia.jpg';
+import edificioFondo from '../../assets/imagenes/edificio.jpeg';
 import './Canton.css';
 
 const fotosPorCategoria = {
   historia: historiaFondo,
   geografia: geografiaFondo,
+  'cultura-identidad': culturaFondo,
+  patrimonio: patrimonioFondo,
+  turismo: turismoFondo,
+  edificio: edificioFondo,
+  'datos-canton': edificioFondo,
 };
 
 const anchaPorCategoria = new Set(['distritos', 'patrimonio', 'turismo', 'datos-canton']);
