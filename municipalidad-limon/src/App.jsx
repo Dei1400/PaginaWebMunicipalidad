@@ -6,6 +6,7 @@ import StatusPage from './features/status/StatusPage';
 import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
 import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
+import Canton from './features/canton/Canton';
 
 function Servicios() {
   return <h1>Servicios</h1>;
@@ -42,6 +43,7 @@ function App() {
           element={<StatusPage variant="error" />}
         />
         <Route path="/gobierno-municipal" element={<GobiernoMunicipal />} />
+        <Route path="/canton" element={<Canton />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/contacto" element={<Contacto />} />
       </Routes>
