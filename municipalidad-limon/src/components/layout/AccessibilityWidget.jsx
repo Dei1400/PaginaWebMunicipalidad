@@ -62,6 +62,21 @@ function getReadableText(target) {
   ).trim();
 }
 
+function getEditableValue(target) {
+  if (
+    target instanceof window.HTMLInputElement ||
+    target instanceof window.HTMLTextAreaElement
+  ) {
+    return target.value.trim();
+  }
+
+  if (target.isContentEditable) {
+    return (target.innerText || target.textContent || '').trim();
+  }
+
+  return '';
+}
+
 function updateEditableValue(target, value) {
   if (target instanceof window.HTMLInputElement) {
     const valueSetter = Object.getOwnPropertyDescriptor(
@@ -104,9 +119,12 @@ function getRecognitionErrorMessage(errorCode) {
     'audio-capture': 'No se encontró un micrófono disponible.',
     network: 'No fue posible conectar con el servicio de reconocimiento.',
     'no-speech': 'No se detectó voz. Intente nuevamente.',
-    'not-allowed': 'El navegador no concedió permiso para usar el micrófono.',
+    'not-allowed':
+      'El navegador no concedió permiso para usar el micrófono. Revise sus permisos de privacidad.',
     'service-not-allowed':
-      'El reconocimiento de voz está bloqueado por el navegador.',
+      'El servicio de reconocimiento de voz no está disponible en este navegador.',
+    'language-not-supported':
+      'El navegador no admite el idioma configurado para el dictado.',
   };
 
   return messages[errorCode] || 'No fue posible completar el dictado.';
@@ -145,9 +163,11 @@ function AccessibilityWidget() {
   const panelId = useId();
   const titleId = useId();
   const descriptionId = useId();
+  const widgetRef = useRef(null);
   const launcherRef = useRef(null);
   const closeButtonRef = useRef(null);
   const previousFocusRef = useRef(null);
+  const shouldRestoreFocusRef = useRef(false);
   const guideRef = useRef(null);
   const recognitionRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -182,7 +202,11 @@ function AccessibilityWidget() {
       return;
     }
 
-    previousFocusRef.current?.focus();
+    if (shouldRestoreFocusRef.current) {
+      previousFocusRef.current?.focus();
+    }
+
+    shouldRestoreFocusRef.current = false;
     previousFocusRef.current = null;
   }, [isOpen]);
 
@@ -193,6 +217,7 @@ function AccessibilityWidget() {
 
     function handleEscape(event) {
       if (event.key === 'Escape') {
+        shouldRestoreFocusRef.current = true;
         setIsOpen(false);
       }
     }
@@ -200,6 +225,32 @@ function AccessibilityWidget() {
     document.addEventListener('keydown', handleEscape);
 
     return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    function handleOutsidePointerDown(event) {
+      if (
+        event.target instanceof window.Node &&
+        !widgetRef.current?.contains(event.target)
+      ) {
+        shouldRestoreFocusRef.current = false;
+        previousFocusRef.current = null;
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('pointerdown', handleOutsidePointerDown, true);
+
+    return () =>
+      document.removeEventListener(
+        'pointerdown',
+        handleOutsidePointerDown,
+        true,
+      );
   }, [isOpen]);
 
   useEffect(() => {
@@ -271,9 +322,17 @@ function AccessibilityWidget() {
     }
 
     const SpeechRecognition = getSpeechRecognitionConstructor();
+    let activeTarget = null;
+    let accumulatedTranscript = '';
+    let restartTimeoutId = null;
     document.body.classList.add('accessibility-speech-input-active');
 
     function stopPreviousRecognition() {
+      if (restartTimeoutId !== null) {
+        window.clearTimeout(restartTimeoutId);
+        restartTimeoutId = null;
+      }
+
       const previousRecognition = recognitionRef.current;
 
       if (previousRecognition) {
@@ -282,15 +341,22 @@ function AccessibilityWidget() {
       }
     }
 
-    function startRecognition(target) {
+    function startRecognition(target, continueDictation = false) {
       stopPreviousRecognition();
+
+      if (!continueDictation || activeTarget !== target) {
+        activeTarget = target;
+        accumulatedTranscript = getEditableValue(target);
+      }
 
       const recognition = new SpeechRecognition();
       let recognitionFailed = false;
+      let receivedResult = false;
 
-      recognition.lang = 'es-CR';
-      recognition.continuous = true;
-      recognition.interimResults = true;
+      recognition.lang = 'es-ES';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
       recognitionRef.current = recognition;
 
       recognition.onstart = () => {
@@ -305,21 +371,32 @@ function AccessibilityWidget() {
           return;
         }
 
-        let transcript = '';
+        let transcriptChunk = '';
 
         for (let resultIndex = event.resultIndex; resultIndex < event.results.length; resultIndex += 1) {
           if (event.results[resultIndex].isFinal) {
-            transcript += event.results[resultIndex][0].transcript;
+            transcriptChunk += event.results[resultIndex][0].transcript;
           }
         }
 
-        if (transcript.trim()) {
-          updateEditableValue(target, transcript.trim());
+        if (transcriptChunk.trim()) {
+          receivedResult = true;
+          accumulatedTranscript = [
+            accumulatedTranscript,
+            transcriptChunk.trim(),
+          ]
+            .filter(Boolean)
+            .join(' ');
+          updateEditableValue(target, accumulatedTranscript);
           setStatusMessage('El texto dictado se agregó al campo seleccionado.');
         }
       };
 
       recognition.onerror = (event) => {
+        if (recognitionRef.current !== recognition) {
+          return;
+        }
+
         recognitionFailed = true;
         setStatusMessage(getRecognitionErrorMessage(event.error));
       };
@@ -329,8 +406,21 @@ function AccessibilityWidget() {
           recognitionRef.current = null;
           setIsListening(false);
 
-          if (!recognitionFailed) {
-            setStatusMessage('Dictado finalizado.');
+          if (
+            !recognitionFailed &&
+            receivedResult &&
+            activeTarget === target &&
+            document.activeElement === target
+          ) {
+            setStatusMessage('Texto agregado. Puede continuar dictando.');
+            restartTimeoutId = window.setTimeout(() => {
+              restartTimeoutId = null;
+              startRecognition(target, true);
+            }, 250);
+          } else if (!recognitionFailed) {
+            setStatusMessage(
+              'Dictado finalizado. Vuelva a enfocar el campo para continuar.',
+            );
           }
         }
       };
@@ -358,6 +448,13 @@ function AccessibilityWidget() {
         event.target instanceof window.Element &&
         event.target.matches(EDITABLE_SELECTOR)
       ) {
+        activeTarget = null;
+
+        if (restartTimeoutId !== null) {
+          window.clearTimeout(restartTimeoutId);
+          restartTimeoutId = null;
+        }
+
         recognitionRef.current?.stop();
       }
     }
@@ -369,6 +466,11 @@ function AccessibilityWidget() {
       document.removeEventListener('focusin', handleEditableFocus);
       document.removeEventListener('focusout', handleEditableBlur);
       document.body.classList.remove('accessibility-speech-input-active');
+      activeTarget = null;
+
+      if (restartTimeoutId !== null) {
+        window.clearTimeout(restartTimeoutId);
+      }
 
       const currentRecognition = recognitionRef.current;
       recognitionRef.current = null;
@@ -378,10 +480,12 @@ function AccessibilityWidget() {
 
   function openPanel() {
     previousFocusRef.current = document.activeElement;
+    shouldRestoreFocusRef.current = true;
     setIsOpen(true);
   }
 
   function closePanel() {
+    shouldRestoreFocusRef.current = true;
     setIsOpen(false);
   }
 
@@ -416,8 +520,9 @@ function AccessibilityWidget() {
         'Voz a texto activada. Enfoque un campo de texto para comenzar a dictar.',
       );
     } else {
-      recognitionRef.current?.abort();
+      const currentRecognition = recognitionRef.current;
       recognitionRef.current = null;
+      currentRecognition?.abort();
       setIsListening(false);
       setStatusMessage('Voz a texto desactivada.');
     }
@@ -429,8 +534,9 @@ function AccessibilityWidget() {
     setSpeechToTextActive(false);
     setIsListening(false);
     window.speechSynthesis?.cancel();
-    recognitionRef.current?.abort();
+    const currentRecognition = recognitionRef.current;
     recognitionRef.current = null;
+    currentRecognition?.abort();
     setStatusMessage('Se restablecieron las opciones de accesibilidad.');
   }
 
@@ -438,7 +544,7 @@ function AccessibilityWidget() {
     hasActivePreferences || textToSpeechActive || speechToTextActive;
 
   return (
-    <div className="accessibility-widget">
+    <div ref={widgetRef} className="accessibility-widget">
       <p
         className="accessibility-widget__announcer"
         role="status"
