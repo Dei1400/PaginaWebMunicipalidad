@@ -18,8 +18,8 @@
 
 @font-face {
   font-family: 'Clear Sans';
-  src: url('../assets/fonts/clear-sans/ClearSans-Regular.woff2')
-    format('woff2');
+  src: url('../assets/fonts/clear-sans/ClearSans-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -27,8 +27,8 @@
 
 @font-face {
   font-family: 'Clear Sans';
-  src: url('../assets/fonts/clear-sans/ClearSans-Bold.woff2')
-    format('woff2');
+  src: url('../assets/fonts/clear-sans/ClearSans-Bold.woff')
+    format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

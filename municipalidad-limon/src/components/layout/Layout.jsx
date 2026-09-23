@@ -6,7 +6,7 @@ import AccessibilityWidget from './AccessibilityWidget';
 function Layout({ children }) {
   return (
     <>
-      <Header />
+
 
       <Navbar />
 
