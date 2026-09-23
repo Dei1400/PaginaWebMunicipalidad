@@ -403,6 +403,7 @@ function getDocumentAriaLabel(document) {
 
 function Transparencia() {
   const searchId = useId();
+  const categorySelectId = useId();
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     transparencyCategories[0].id,
   );
@@ -470,16 +471,16 @@ function Transparencia() {
 
           <dl className="transparency__overview-list">
             <div>
-              <dt>{transparencyCategories.length}</dt>
-              <dd>áreas de consulta</dd>
+              <dt>Áreas de consulta</dt>
+              <dd>{transparencyCategories.length}</dd>
             </div>
             <div>
-              <dt>{transparencyDocuments.length}</dt>
-              <dd>documentos y sistemas</dd>
+              <dt>Documentos y sistemas</dt>
+              <dd>{transparencyDocuments.length}</dd>
             </div>
             <div>
-              <dt>2024–2029</dt>
-              <dd>plan estratégico vigente</dd>
+              <dt>Plan estratégico vigente</dt>
+              <dd>2024–2029</dd>
             </div>
           </dl>
         </div>
@@ -541,6 +542,21 @@ function Transparencia() {
               Seleccione un área para consultar su información directamente en
               esta página.
             </p>
+          </div>
+
+          <div className="transparency__mobile-category">
+            <label htmlFor={categorySelectId}>Área de transparencia</label>
+            <select
+              id={categorySelectId}
+              value={selectedCategoryId}
+              onChange={(event) => setSelectedCategoryId(event.target.value)}
+            >
+              {transparencyCategories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="transparency__explorer">
