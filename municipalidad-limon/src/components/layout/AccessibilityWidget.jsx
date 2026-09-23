@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import accessibilityLogo from '../../assets/accessibility_logo.png';
 import useAccessibilityPreferences from '../common/accessibility/useAccessibilityPreferences.js';
 import './AccessibilityWidget.css';
 
@@ -665,7 +666,12 @@ function AccessibilityWidget() {
         aria-controls={panelId}
         onClick={isOpen ? closePanel : openPanel}
       >
-        <span aria-hidden="true">♿</span>
+        <img
+          className="accessibility-widget__launcher-icon"
+          src={accessibilityLogo}
+          alt=""
+          aria-hidden="true"
+        />
       </button>
     </div>
   );
