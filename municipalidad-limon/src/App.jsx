@@ -6,10 +6,7 @@ import StatusPage from './features/status/StatusPage';
 import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
 import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
-
-function Servicios() {
-  return <h1>Servicios</h1>;
-}
+import Servicios from './features/servicios/Servicios';
 
 function Municipalidad() {
   return <h1>Municipalidad</h1>;
