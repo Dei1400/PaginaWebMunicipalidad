@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './features/home/Home';
 import Tramites from './features/tramites/Tramites';
+import Transparencia from './features/transparencia/Transparencia';
 
 function Servicios() {
   return <h1>Servicios</h1>;
@@ -10,10 +11,6 @@ function Servicios() {
 
 function Municipalidad() {
   return <h1>Municipalidad</h1>;
-}
-
-function Transparencia() {
-  return <h1>Transparencia</h1>;
 }
 
 function Noticias() {
