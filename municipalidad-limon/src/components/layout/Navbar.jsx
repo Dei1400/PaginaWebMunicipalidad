@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Container from '../ui/Container';
 import './Navbar.css';
@@ -34,28 +35,39 @@ const navigationItems = [
 ];
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav
-      className="navbar"
-      aria-label="Navegación principal"
-    >
+    <nav className="navbar" aria-label="Navegación principal">
       <Container>
-        <ul className="navbar__list">
-          {navigationItems.map((item) => (
-            <li key={item.path}>
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? 'navbar__link navbar__link--active'
-                    : 'navbar__link'
-                }
-              >
-                {item.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        <div className="navbar__inner">
+          <button
+            className={`navbar__toggle ${isOpen ? 'navbar__toggle--open' : ''}`}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label="Alternar menú"
+          >
+            <span className="navbar__toggle-icon"></span>
+          </button>
+
+          <ul className={`navbar__list ${isOpen ? 'navbar__list--open' : ''}`}>
+            {navigationItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'navbar__link navbar__link--active'
+                      : 'navbar__link'
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </nav>
   );
