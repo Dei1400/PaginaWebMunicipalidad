@@ -15,6 +15,7 @@ export const gobiernoCategories = [
   {
     id: 'alcaldia',
     icon: 'AL',
+    color: 'primary',
     title: 'Alcaldía',
     summary: 'Quién dirige la administración municipal, sus funciones y canales de contacto.',
     data: {
@@ -35,6 +36,7 @@ export const gobiernoCategories = [
   {
     id: 'vicealcaldias',
     icon: 'VA',
+    color: 'primary-hover',
     title: 'Vicealcaldías',
     summary: 'Funciones, áreas delegadas y programas relacionados a cada vicealcaldía.',
     data: {
@@ -49,6 +51,7 @@ export const gobiernoCategories = [
   {
     id: 'concejo-municipal',
     icon: 'CM',
+    color: 'secondary',
     title: 'Concejo Municipal',
     summary: 'Quiénes lo integran, qué decide, cuándo sesiona y cómo consultar acuerdos.',
     data: {
@@ -110,6 +113,7 @@ export const gobiernoCategories = [
   {
     id: 'secretaria-concejo',
     icon: 'SC',
+    color: 'secondary-hover',
     title: 'Secretaría del Concejo',
     summary: 'Funciones de la Secretaría y cómo solicitar un documento.',
     data: {
@@ -125,6 +129,7 @@ export const gobiernoCategories = [
   {
     id: 'sesiones-municipales',
     icon: 'SM',
+    color: 'accent',
     title: 'Sesiones municipales',
     summary: 'Calendario de sesiones y transmisión por canales oficiales.',
     data: {
@@ -140,6 +145,7 @@ export const gobiernoCategories = [
   {
     id: 'periodos-anteriores',
     icon: 'PA',
+    color: 'support',
     title: 'Períodos anteriores',
     summary: 'Autoridades e integración del Concejo de cuadrenios pasados.',
     data: {

@@ -206,16 +206,15 @@ function GobiernoMunicipal() {
           </div>
         </div>
       </section>
-
       <section
-        className="section gobierno__categories-section"
+        className="section gobierno__folder-section"
         aria-labelledby="gobierno-categories-title"
       >
         <div className="container">
           <p className="gobierno__eyebrow">Secciones</p>
           <h2 id="gobierno-categories-title">Explore la estructura de gobierno</h2>
 
-          <div className="gobierno__category-grid">
+          <div className="gobierno__tabs" role="tablist" aria-label="Secciones de Gobierno Municipal">
             {gobiernoCategories.map((category) => {
               const isSelected = category.id === selectedId;
 
@@ -223,44 +222,44 @@ function GobiernoMunicipal() {
                 <button
                   key={category.id}
                   type="button"
-                  className={`gobierno__category ${isSelected ? 'gobierno__category--selected' : ''}`}
-                  aria-pressed={isSelected}
+                  role="tab"
+                  aria-selected={isSelected}
+                  className={`gobierno__tab gobierno__tab--${category.color} ${
+                    isSelected ? 'gobierno__tab--active' : ''
+                  }`}
                   onClick={() => setSelectedId(category.id)}
                 >
-                  <span className="gobierno__category-icon" aria-hidden="true">
-                    {category.icon}
-                  </span>
-                  <span className="gobierno__category-content">
-                    <span className="gobierno__category-title">{category.title}</span>
-                    <span className="gobierno__category-description">{category.summary}</span>
-                  </span>
+                  {category.title}
                 </button>
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {selected && (
-        <section className="gobierno__detail-section" aria-labelledby="gobierno-detail-title">
-          <div className="container">
-            <div className="gobierno__detail">
-              <div className="gobierno__detail-heading">
-                <span className="gobierno__category-icon gobierno__category-icon--lg" aria-hidden="true">
+          {selected && (
+            <div
+              className={`gobierno__folder-body gobierno__folder-body--${selected.color}`}
+              role="tabpanel"
+            >
+              <div className="gobierno__folder-heading">
+                <span
+                  className={`gobierno__folder-icon gobierno__folder-icon--${selected.color}`}
+                  aria-hidden="true"
+                >
                   {selected.icon}
                 </span>
-                <h2 id="gobierno-detail-title">{selected.title}</h2>
+                <h3>{selected.title}</h3>
               </div>
 
-              <div className="gobierno__detail-body">
+              <div className="gobierno__folder-content">
                 {renderDetalle(selected)}
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
     </div>
   );
 }
 
 export default GobiernoMunicipal;
+      
