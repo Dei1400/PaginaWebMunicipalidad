@@ -368,6 +368,12 @@
   gap: var(--space-3) var(--space-5);
 }
 
+.transparency__related-documents > p {
+  max-width: 680px;
+  margin-bottom: var(--space-3);
+  color: var(--color-text-secondary);
+}
+
 .transparency__library-section {
   border-top: var(--border-width) solid var(--color-border);
   background-color: var(--color-surface);

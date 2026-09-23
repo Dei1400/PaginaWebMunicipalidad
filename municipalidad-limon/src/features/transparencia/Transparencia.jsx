@@ -4,8 +4,6 @@ import Input from '../../components/ui/Input';
 import Link from '../../components/ui/Link';
 import './Transparencia.css';
 
-const OFFICIAL_SITE = 'https://www.municlimon.go.cr';
-
 const transparencyCategories = [
   {
     id: 'acceso-informacion',
@@ -302,7 +300,7 @@ const transparencyDocuments = [
     format: 'PDF',
     source: 'Planificación institucional',
     categoryIds: ['rendicion-cuentas', 'obras-proyectos'],
-    href: `${OFFICIAL_SITE}/images/conozcanos/alcaldia/PlanesMunicipales/plan-estratgico-municipal-pem-vinculado-al-de-gobierno-2024---2029.pdf`,
+    to: '/error-interno',
     featured: true,
   },
   {
@@ -314,7 +312,7 @@ const transparencyDocuments = [
     format: 'PDF',
     source: 'Planificación institucional',
     categoryIds: ['presupuestos-finanzas', 'rendicion-cuentas'],
-    href: `${OFFICIAL_SITE}/images/conozcanos/alcaldia/1.-evaluacin-fisica-financiera-anual-pao-ii-semestre-2024.pdf`,
+    to: '/error-interno',
     featured: true,
   },
   {
@@ -330,7 +328,7 @@ const transparencyDocuments = [
       'presupuestos-finanzas',
       'obras-proyectos',
     ],
-    href: `${OFFICIAL_SITE}/images/conozcanos/alcaldia/informesdelabores/informe-de-labores-2023.pdf`,
+    to: '/error-interno',
     featured: true,
   },
   {
@@ -342,7 +340,7 @@ const transparencyDocuments = [
     format: 'PDF',
     source: 'Auditoría Interna',
     categoryIds: ['auditoria-interna', 'rendicion-cuentas'],
-    href: `${OFFICIAL_SITE}/images/conozcanos/concejo/auditoria/informes/InformeN08-2019EstudiodecontrolinternosobreelcumplimientohorariodelosfuncionariosmunicipalesdeCECOEXAfirmado.pdf`,
+    to: '/error-interno',
   },
   {
     id: 'auditoria-09-2019',
@@ -353,7 +351,7 @@ const transparencyDocuments = [
     format: 'PDF',
     source: 'Auditoría Interna',
     categoryIds: ['auditoria-interna', 'rendicion-cuentas'],
-    href: `${OFFICIAL_SITE}/images/conozcanos/concejo/auditoria/informes/InformeN09-2019EstudioEspecialSobreUsoyControldeFlotillaVehicularfirmado.pdf`,
+    to: '/error-interno',
   },
   {
     id: 'sicop',
@@ -365,6 +363,7 @@ const transparencyDocuments = [
     source: 'SICOP',
     categoryIds: ['contratacion-publica', 'datos-abiertos'],
     href: 'https://www.sicop.go.cr/',
+    external: true,
   },
 ];
 
@@ -381,6 +380,25 @@ function normalizeText(value) {
     .toLocaleLowerCase('es')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
+}
+
+function getDocumentLinkProps(document) {
+  if (document.external) {
+    return { href: document.href, external: true };
+  }
+
+  return {
+    to: document.to,
+    state: { resourceTitle: document.title },
+  };
+}
+
+function getDocumentAriaLabel(document) {
+  if (document.external) {
+    return `${document.title}, abrir sistema externo en una pestaña nueva`;
+  }
+
+  return `${document.title}, consultar disponibilidad`;
 }
 
 function Transparencia() {
@@ -496,11 +514,10 @@ function Transparencia() {
                 <h3>{document.title}</h3>
                 <p>{document.description}</p>
                 <Link
-                  href={document.href}
-                  external
-                  aria-label={`${document.title}, abrir PDF en una pestaña nueva`}
+                  {...getDocumentLinkProps(document)}
+                  aria-label={getDocumentAriaLabel(document)}
                 >
-                  Abrir documento
+                  Consultar documento
                 </Link>
               </article>
             ))}
@@ -593,21 +610,36 @@ function Transparencia() {
                 </div>
               </aside>
 
-              {selectedDocuments.length > 0 && (
+              {selectedDocuments.length > 0 ? (
                 <section className="transparency__related-documents">
                   <h3>Documentos relacionados</h3>
                   <div>
                     {selectedDocuments.map((document) => (
                       <Link
                         key={document.id}
-                        href={document.href}
-                        external
-                        aria-label={`${document.title}, abrir en una pestaña nueva`}
+                        {...getDocumentLinkProps(document)}
+                        aria-label={getDocumentAriaLabel(document)}
                       >
                         {document.title}
                       </Link>
                     ))}
                   </div>
+                </section>
+              ) : (
+                <section className="transparency__related-documents">
+                  <h3>Archivo digital</h3>
+                  <p>
+                    La consulta documental detallada de esta área se encuentra
+                    en proceso de preparación.
+                  </p>
+                  <Link
+                    to="/en-construccion"
+                    state={{
+                      resourceTitle: `Archivo de ${selectedCategory.title}`,
+                    }}
+                  >
+                    Consultar avance
+                  </Link>
                 </section>
               )}
             </article>
@@ -664,13 +696,12 @@ function Transparencia() {
                     </p>
                   </div>
                   <Link
-                    href={document.href}
-                    external
-                    aria-label={`${document.title}, abrir en una pestaña nueva`}
+                    {...getDocumentLinkProps(document)}
+                    aria-label={getDocumentAriaLabel(document)}
                   >
                     {document.format === 'Sistema'
                       ? 'Consultar sistema'
-                      : 'Abrir PDF'}
+                      : 'Consultar PDF'}
                   </Link>
                 </article>
               ))}
