@@ -206,12 +206,12 @@ function GobiernoMunicipal() {
           </div>
         </div>
       </section>
+
       <section
         className="section gobierno__folder-section"
         aria-labelledby="gobierno-categories-title"
       >
         <div className="container">
-          <p className="gobierno__eyebrow">Secciones</p>
           <h2 id="gobierno-categories-title">Explore la estructura de gobierno</h2>
 
           <div className="gobierno__tabs" role="tablist" aria-label="Secciones de Gobierno Municipal">
@@ -240,19 +240,7 @@ function GobiernoMunicipal() {
               className={`gobierno__folder-body gobierno__folder-body--${selected.color}`}
               role="tabpanel"
             >
-              <div className="gobierno__folder-heading">
-                <span
-                  className={`gobierno__folder-icon gobierno__folder-icon--${selected.color}`}
-                  aria-hidden="true"
-                >
-                  {selected.icon}
-                </span>
-                <h3>{selected.title}</h3>
-              </div>
-
-              <div className="gobierno__folder-content">
-                {renderDetalle(selected)}
-              </div>
+              {renderDetalle(selected)}
             </div>
           )}
         </div>
@@ -262,4 +250,3 @@ function GobiernoMunicipal() {
 }
 
 export default GobiernoMunicipal;
-      
