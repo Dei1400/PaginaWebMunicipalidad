@@ -5,6 +5,7 @@ import Home from './features/home/Home';
 import StatusPage from './features/status/StatusPage';
 import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
+import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
 
 function Servicios() {
   return <h1>Servicios</h1>;
@@ -13,6 +14,11 @@ function Servicios() {
 function Municipalidad() {
   return <h1>Municipalidad</h1>;
 }
+
+function Transparencia() {
+  return <h1>Transparencia</h1>;
+}
+
 
 function Noticias() {
   return <h1>Noticias</h1>;
@@ -39,6 +45,7 @@ function App() {
           path="/error-interno"
           element={<StatusPage variant="error" />}
         />
+        <Route path="/gobierno-municipal" element={<GobiernoMunicipal />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/contacto" element={<Contacto />} />
       </Routes>
