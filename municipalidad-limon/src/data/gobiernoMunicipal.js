@@ -1,4 +1,8 @@
 // src/data/gobiernoMunicipal.js
+import fotoAna from '../assets/imagenes/Ana.png';
+import fotoJohn from '../assets/imagenes/John.png';
+import fotoKaterine from '../assets/imagenes/Katerine.png';
+import fotoJuan from '../assets/imagenes/Juan.png';
 
 export const visionMision = {
   vision:
@@ -19,7 +23,7 @@ export const gobiernoCategories = [
       persona: {
         nombre: 'Ana Janniel Matarrita McCalla',
         cargo: 'Alcaldesa Municipal',
-        foto: null,
+        foto: fotoAna,
       },
       funciones: [
         'Dirigir la administración general y el presupuesto municipal',
@@ -37,8 +41,8 @@ export const gobiernoCategories = [
       descripcion:
         'La 1.ª Vicealcaldía asume las funciones ejecutivas delegadas (proyectos sociales, área comunitaria y cultural) y la sustitución temporal de la Alcaldía. La 2.ª Vicealcaldía apoya los planes estratégicos de desarrollo.',
       personas: [
-        { nombre: 'John Gutiérrez Gómez', cargo: '1.ª Vicealcaldía', foto: null },
-        { nombre: 'Katerine Calvo Lobo', cargo: '2.ª Vicealcaldía', foto: null },
+        { nombre: 'John Gutiérrez Gómez', cargo: '1.ª Vicealcaldía', foto: fotoJohn },
+        { nombre: 'Katerine Calvo Lobo', cargo: '2.ª Vicealcaldía', foto: fotoKaterine },
       ],
     },
   },
@@ -73,7 +77,7 @@ export const gobiernoCategories = [
       presidencia: {
         nombre: 'Juan Pablo Poveda Chinchilla',
         cargo: 'Presidente del Concejo Municipal',
-        foto: null,
+        foto: fotoJuan,
       },
       regidores: [
         {
