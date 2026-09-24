@@ -103,12 +103,17 @@
 
 .navbar__toggle {
   display: none;
+  align-items: center;
+  gap: var(--space-2);
   background: transparent;
   border: none;
   cursor: pointer;
   padding: var(--space-3);
   margin-right: auto;
   outline: none;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 
 .navbar__toggle:focus-visible {
@@ -155,6 +160,10 @@
   transform: translateY(0) rotate(-45deg);
 }
 
+.navbar__toggle-text {
+  font-size: 1rem;
+}
+
 /*
  * Móvil
  */
@@ -164,7 +173,7 @@
   }
 
   .navbar__toggle {
-    display: block;
+    display: flex;
     margin-right: 0;
   }
 
