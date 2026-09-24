@@ -1,8 +1,8 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import PageHeader from '../../components/common/PageHeader';
-import Button from '../../components/ui/Button';
-import Input from '../../components/ui/Input';
+import heroBg from '../../../public/images/hero.jpeg';
+import municipalLogo from '../../assets/logo.svg';
+import Breadcrumb from '../../components/common/Breadcrumb';
 import Link from '../../components/ui/Link';
 import './Tramites.css';
 
@@ -404,43 +404,69 @@ function Tramites() {
   }
 
   return (
-    <div className="tramites">
-      <PageHeader
-        title="Trámites"
-        description="Encuentre la información, los requisitos y la orientación necesaria para realizar sus gestiones municipales."
-        breadcrumbItems={[{ label: 'Trámites' }]}
-      />
+    <main className="tramites">
+      <section className="tramites__hero" style={{ backgroundImage: `url(${heroBg})` }}>
+        <div className="tramites__hero-overlay">
+          <div className="container">
+            <div className="tramites__hero-content">
+              <div className="tramites__brand">
+                <div className="tramites__brand-mark" aria-hidden="true">
+                  <img src={municipalLogo} alt="" />
+                </div>
+                <div className="tramites__brand-name">
+                  <strong>Municipalidad de Limón</strong>
+                </div>
+              </div>
 
-      <section className="tramites__search-section">
-        <div className="container tramites__search-layout">
-          <div className="tramites__intro">
-            <p className="tramites__eyebrow">Atención ciudadana</p>
-            <h2>¿Qué trámite necesita realizar?</h2>
-            <p>
-              Reunimos gestiones que antes estaban distribuidas entre distintas
-              dependencias para que pueda identificar qué necesita, qué debe
-              preparar y dónde solicitar ayuda.
+              <form
+                className="tramites__hero-search"
+                onSubmit={handleSearchSubmit}
+                role="search"
+              >
+                <label htmlFor={searchId} className="tramites__search-label">
+                  Buscar trámites municipales
+                </label>
+                <input
+                  id={searchId}
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="¿Qué trámite necesita encontrar?"
+                />
+                <button type="submit">Buscar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="tramites__categories-section"
+        aria-labelledby="tramites-categories-title"
+      >
+        <div className="container tramites__catalog-container">
+          <Breadcrumb items={[{ label: 'Trámites' }]} />
+
+          <div className="tramites__section-heading">
+            <div>
+              <h1
+                id="tramites-categories-title"
+                ref={categoriesHeadingRef}
+                tabIndex="-1"
+              >
+                Trámites por área municipal
+              </h1>
+              <p>
+                Encuentre la gestión que necesita, revise los requisitos y
+                confirme el canal de atención correspondiente.
+              </p>
+            </div>
+            <p className="tramites__results" aria-live="polite">
+              {visibleCategories.length === 1
+                ? '1 categoría encontrada'
+                : `${visibleCategories.length} categorías encontradas`}
             </p>
           </div>
-
-          <form
-            className="tramites__search-form"
-            onSubmit={handleSearchSubmit}
-            role="search"
-          >
-            <Input
-              id={searchId}
-              label="Buscar un trámite"
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Ejemplo: patente, pago o catastro"
-              helperText="Los resultados se actualizan mientras escribe. La búsqueda no distingue tildes."
-            />
-            <Button type="submit" className="tramites__search-button">
-              Ver resultados
-            </Button>
-          </form>
 
           {query && (
             <button
@@ -451,31 +477,6 @@ function Tramites() {
               Limpiar búsqueda
             </button>
           )}
-        </div>
-      </section>
-
-      <section
-        className="section tramites__categories-section"
-        aria-labelledby="tramites-categories-title"
-      >
-        <div className="container">
-          <div className="tramites__section-heading">
-            <div>
-              <p className="tramites__eyebrow">Categorías</p>
-              <h2
-                id="tramites-categories-title"
-                ref={categoriesHeadingRef}
-                tabIndex="-1"
-              >
-                Explore los trámites por tema
-              </h2>
-            </div>
-            <p className="tramites__results" aria-live="polite">
-              {visibleCategories.length === 1
-                ? '1 categoría encontrada'
-                : `${visibleCategories.length} categorías encontradas`}
-            </p>
-          </div>
 
           {visibleCategories.length > 0 ? (
             <div className="tramites__category-grid">
@@ -523,9 +524,13 @@ function Tramites() {
                   Pruebe con una palabra más general, como “pago”, “propiedad”
                   o “formulario”.
                 </p>
-                <Button type="button" variant="tertiary" onClick={clearSearch}>
+                <button
+                  type="button"
+                  className="tramites__empty-button"
+                  onClick={clearSearch}
+                >
                   Ver todas las categorías
-                </Button>
+                </button>
               </div>
             </div>
           )}
@@ -687,7 +692,7 @@ function Tramites() {
           </ol>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
 
