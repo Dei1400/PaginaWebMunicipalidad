@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Card from '../../components/ui/Card';
 import Link from '../../components/ui/Link';
 import heroBg from '../../../public/images/hero.jpeg';
-import municipalLogo from '../../assets/logo.svg';
+import cityOfLifeLogo from '../../assets/limon-ciudad-de-la-vida.svg';
 
 import './Home.css';
 
@@ -123,16 +123,13 @@ function Home() {
         <div className="home__hero-overlay">
           <div className="container">
 
-            {/* Marca / logo */}
             <div className="home__hero-content">
               <div className="home__brand">
-                <div className="home__brand-mark" aria-hidden="true">
-                  <img src={municipalLogo} alt="" />
-                </div>
-                <div className="home__brand-name">
-                  
-                  <strong>Municipalidad de Limón</strong>
-                </div>
+                <img
+                  className="home__brand-image"
+                  src={cityOfLifeLogo}
+                  alt="Limón, ciudad de la vida"
+                />
               </div>
 
 

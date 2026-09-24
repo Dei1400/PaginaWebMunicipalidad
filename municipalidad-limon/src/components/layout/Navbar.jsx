@@ -48,6 +48,7 @@ function Navbar() {
             aria-label="Alternar menú"
           >
             <span className="navbar__toggle-icon"></span>
+            <span className="navbar__toggle-text">Menú</span>
           </button>
 
           <ul className={`navbar__list ${isOpen ? 'navbar__list--open' : ''}`}>
