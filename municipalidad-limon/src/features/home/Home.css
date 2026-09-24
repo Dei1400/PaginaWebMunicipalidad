@@ -55,6 +55,8 @@
 }
 
 .home__search {
+  position: relative;
+  z-index: 3;
   width: min(100%, 650px);
   margin-bottom: calc(var(--space-9) + var(--space-4));
 }
@@ -81,6 +83,11 @@
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+}
+
+.home__search-group:focus-within {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 28%), var(--shadow-md);
 }
 
 .home__search-group input {
@@ -117,6 +124,98 @@
 
 .home__search-group button:hover {
   background-color: var(--color-primary-hover);
+}
+
+.home__search-suggestions {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  left: 0;
+  display: none;
+  overflow: hidden;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 16px 38px rgb(0 0 0 / 24%);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.home__search-suggestions--visible {
+  display: block;
+  animation: home-search-suggestions-in 160ms ease-out;
+}
+
+.home__search-suggestion {
+  display: grid;
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-3) var(--space-4);
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  background-color: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.home__search-suggestion:last-child {
+  border-bottom: 0;
+}
+
+.home__search-suggestion:hover,
+.home__search-suggestion:focus-visible,
+.home__search-suggestion--active {
+  background-color: var(--color-surface);
+  outline: none;
+}
+
+.home__search-suggestion-title {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.home__search-suggestion-description {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.home__search-suggestion mark {
+  padding: 0 2px;
+  background-color: color-mix(in srgb, var(--color-secondary) 28%, transparent);
+  border-radius: 3px;
+  color: inherit;
+  font-weight: 800;
+}
+
+.home__search-empty {
+  margin: 0;
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+@keyframes home-search-suggestions-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__search-suggestions--visible {
+    animation: none;
+  }
 }
 
 .home__featured {
