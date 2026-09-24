@@ -27,6 +27,8 @@ const tramiteCategories = [
     office: 'Área de Rentas y Patentes',
     contact: 'rentas@municlimon.go.cr · 2758-7220 / 2758-4444 ext. 112',
     contactHref: 'mailto:rentas@municlimon.go.cr',
+    channel: 'Orientación municipal',
+    primaryAction: 'Consultar requisitos',
     resources: [
       {
         title: 'Solicitud de patente comercial',
@@ -63,6 +65,8 @@ const tramiteCategories = [
     office: 'Departamento de Cobros',
     contact: 'cobros@municlimon.go.cr · 2758-4444 / 2798-1101',
     contactHref: 'mailto:cobros@municlimon.go.cr',
+    channel: 'Sistema externo',
+    primaryAction: 'Consultar pendientes',
     resources: [
       {
         title: 'Consulta de pendientes de cobro',
@@ -105,6 +109,8 @@ const tramiteCategories = [
     office: 'Catastro y Bienes Inmuebles',
     contact: '2758-4444 · Catastro ext. 215 · Bienes Inmuebles ext. 208 o 209',
     contactHref: 'tel:+50627584444',
+    channel: 'Atención especializada',
+    primaryAction: 'Revisar documentos',
     resources: [
       {
         title: 'Solicitud de uso de suelo',
@@ -145,6 +151,8 @@ const tramiteCategories = [
     office: 'Unidad de Zona Marítimo Terrestre',
     contact: '2758-4444',
     contactHref: 'tel:+50627584444',
+    channel: 'Atención especializada',
+    primaryAction: 'Consultar concesión',
     resources: [
       {
         title: 'Solicitud de concesión',
@@ -179,6 +187,8 @@ const tramiteCategories = [
     office: 'Unidad de Mercado y Plazas',
     contact: '2798-2682',
     contactHref: 'tel:+50627982682',
+    channel: 'Atención presencial',
+    primaryAction: 'Solicitar orientación',
     resources: [
       {
         title: 'Solicitud de alquiler de un local',
@@ -213,6 +223,8 @@ const tramiteCategories = [
     office: 'Ventanilla Única Municipal',
     contact: 'ventanilla.unica@municlimon.go.cr · 2758-4444',
     contactHref: 'mailto:ventanilla.unica@municlimon.go.cr',
+    channel: 'Formularios',
+    primaryAction: 'Ver formularios',
     resources: [
       {
         title: 'Formularios de patentes',
@@ -364,6 +376,8 @@ function Tramites() {
         category.description,
         category.office,
         category.contact,
+        category.channel,
+        category.primaryAction,
         ...category.actions,
         ...category.requirements,
         ...category.resources.flatMap((resource) => [
@@ -454,7 +468,7 @@ function Tramites() {
                 ref={categoriesHeadingRef}
                 tabIndex="-1"
               >
-                Trámites por área municipal
+                Trámites municipales
               </h1>
               <p>
                 Encuentre la gestión que necesita, revise los requisitos y
@@ -502,6 +516,14 @@ function Tramites() {
                       <span className="tramites__category-title">
                         {category.title}
                       </span>
+                      <span className="tramites__category-meta">
+                        <span>{category.channel}</span>
+                        {isSelected && (
+                          <span className="tramites__selected-label">
+                            Categoría activa
+                          </span>
+                        )}
+                      </span>
                       <span className="tramites__category-description">
                         {category.description}
                       </span>
@@ -524,6 +546,17 @@ function Tramites() {
                   Pruebe con una palabra más general, como “pago”, “propiedad”
                   o “formulario”.
                 </p>
+                <div className="tramites__empty-suggestions" aria-label="Búsquedas sugeridas">
+                  <button type="button" onClick={() => setQuery('pago')}>
+                    Pago
+                  </button>
+                  <button type="button" onClick={() => setQuery('patente')}>
+                    Patente
+                  </button>
+                  <button type="button" onClick={() => setQuery('formulario')}>
+                    Formulario
+                  </button>
+                </div>
                 <button
                   type="button"
                   className="tramites__empty-button"
@@ -542,6 +575,7 @@ function Tramites() {
           id="tramite-detail-panel"
           className="tramites__detail-section"
           aria-labelledby="tramite-detail-title"
+          aria-live="polite"
         >
           <div className="container">
             <div className="tramites__detail">
@@ -567,6 +601,27 @@ function Tramites() {
                   </div>
                 </div>
                 <p>{selectedCategory.description}</p>
+              </div>
+
+              <div className="tramites__summary-strip" aria-label="Resumen del trámite seleccionado">
+                <div>
+                  <span>Canal</span>
+                  <strong>{selectedCategory.channel}</strong>
+                </div>
+                <div>
+                  <span>Área responsable</span>
+                  <strong>{selectedCategory.office}</strong>
+                </div>
+                <div>
+                  <span>Acción recomendada</span>
+                  <strong>{selectedCategory.primaryAction}</strong>
+                </div>
+                <Link
+                  href={selectedCategory.contactHref}
+                  className="tramites__primary-action"
+                >
+                  {selectedCategory.primaryAction}
+                </Link>
               </div>
 
               <div className="tramites__detail-grid">
