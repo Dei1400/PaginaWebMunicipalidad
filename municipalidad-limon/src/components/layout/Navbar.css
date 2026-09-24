@@ -139,6 +139,7 @@
   outline: none;
   color: var(--color-text);
   font-weight: 800;
+  font-family: var(--font-heading);
 }
 
 .navbar__toggle:focus-visible {
