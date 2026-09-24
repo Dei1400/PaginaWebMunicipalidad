@@ -19,7 +19,6 @@ const fotosPorCategoria = {
   'datos-canton': edificioFondo,
 };
 
-const anchaPorCategoria = new Set(['distritos', 'patrimonio', 'turismo', 'datos-canton']);
 
 function DetalleHistoria({ data }) {
   return (
@@ -173,7 +172,6 @@ function Canton() {
   const [selectedId, setSelectedId] = useState(cantonCategories[0].id);
   const selected = cantonCategories.find((category) => category.id === selectedId);
   const foto = fotosPorCategoria[selectedId];
-  const esAncha = anchaPorCategoria.has(selectedId);
 
   return (
     <div className="canton">
@@ -214,7 +212,7 @@ function Canton() {
         role="tabpanel"
       >
         <div className="container">
-          <div className={`canton__tarjeta ${esAncha ? 'canton__tarjeta--ancha' : ''}`}>
+          <div className="canton__tarjeta">
             <p className="canton__eyebrow">{selected.title}</p>
             <h2>{selected.summary}</h2>
             {renderDetalle(selected)}

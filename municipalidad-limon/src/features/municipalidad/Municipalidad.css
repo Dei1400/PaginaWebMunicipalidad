@@ -68,6 +68,7 @@
 .muni__tab--active.muni__tab--support { border-color: var(--color-support); }
 
 .muni__folder-body {
+  width: 100%;
   padding: var(--space-7);
   border: 2px solid var(--color-border);
   border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
