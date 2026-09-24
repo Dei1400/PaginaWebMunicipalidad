@@ -1,0 +1,320 @@
+.canton {
+  background-color: var(--color-surface);
+}
+
+.canton .page-header {
+  border-bottom: none;
+}
+
+.canton__tabs-wrapper {
+  padding-bottom: var(--space-6);
+  background-color: var(--color-white);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.canton__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.canton__tab {
+  padding: var(--space-3) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  color: var(--color-white);
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.canton__tab:hover {
+  filter: brightness(1.1);
+}
+
+.canton__tab--active {
+  background-color: var(--color-white) !important;
+  color: var(--color-text) !important;
+  border: 2px solid;
+}
+
+.canton__tab--primary { background-color: var(--color-primary); }
+.canton__tab--primary-hover { background-color: var(--color-primary-hover); }
+.canton__tab--secondary { background-color: var(--color-secondary); }
+.canton__tab--secondary-hover { background-color: var(--color-secondary-hover); }
+.canton__tab--accent { background-color: var(--color-accent); }
+.canton__tab--support { background-color: var(--color-support); color: var(--color-black); }
+
+.canton__tab--active.canton__tab--primary { border-color: var(--color-primary); }
+.canton__tab--active.canton__tab--primary-hover { border-color: var(--color-primary-hover); }
+.canton__tab--active.canton__tab--secondary { border-color: var(--color-secondary); }
+.canton__tab--active.canton__tab--secondary-hover { border-color: var(--color-secondary-hover); }
+.canton__tab--active.canton__tab--accent { border-color: var(--color-accent); }
+.canton__tab--active.canton__tab--support { border-color: var(--color-support); }
+
+.canton__panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-9);
+  background-size: cover;
+  background-position: center;
+}
+
+.canton__panel--primary { background-color: var(--color-primary); }
+.canton__panel--primary-hover { background-color: var(--color-primary-hover); }
+.canton__panel--secondary { background-color: var(--color-secondary); }
+.canton__panel--secondary-hover { background-color: var(--color-secondary-hover); }
+.canton__panel--accent { background-color: var(--color-accent); }
+.canton__panel--support { background-color: var(--color-support); }
+
+.canton__tarjeta {
+  width: 100%;
+  padding: var(--space-7);
+  border-radius: var(--radius-lg);
+  background-color: rgb(255 255 255 / 94%);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 25%);
+}
+
+.canton__tarjeta h2 {
+  margin-bottom: var(--space-4);
+}
+
+.canton__tarjeta p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.canton__eyebrow {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.canton__subtitulo {
+  margin: var(--space-6) 0 var(--space-4);
+}
+
+.canton__timeline {
+  margin-top: var(--space-2);
+}
+
+.canton__timeline-item {
+  position: relative;
+  display: flex;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+}
+
+.canton__timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background-color: var(--color-border);
+}
+
+.canton__timeline-punto {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.canton__timeline-periodo {
+  margin-bottom: var(--space-1) !important;
+  font-weight: 700;
+  color: var(--color-text) !important;
+}
+
+.canton__distritos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.canton__distrito-item {
+  margin-bottom: var(--space-3);
+}
+
+.canton__distrito-boton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-align: left;
+}
+
+.canton__distrito-boton--activo {
+  border-color: var(--color-secondary);
+  background-color: var(--color-surface);
+  color: var(--color-secondary);
+}
+
+.canton__distrito-numero {
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.canton__distrito-detalle {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background-color: var(--color-white);
+}
+
+.canton__distrito-detalle p {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.canton__distrito-cp {
+  font-size: var(--font-size-small);
+}
+
+.canton__mapa {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+
+.canton__checklist {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.canton__checklist li {
+  position: relative;
+  padding-left: var(--space-5);
+  color: var(--color-text-secondary);
+}
+
+.canton__checklist li::before {
+  content: '';
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.canton__gastronomia-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.canton__gastronomia-card {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.canton__gastronomia-nombre {
+  margin-bottom: var(--space-2);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.canton__gastronomia-card p:last-child {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+}
+
+.canton__galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+.canton__galeria-card {
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+}
+
+.canton__galeria-nombre {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.canton__galeria-card p:last-child {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.canton__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.canton__stat-card {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  text-align: center;
+}
+
+.canton__stat-valor {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.canton__stat-etiqueta {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 900px) {
+  .canton__distritos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .canton__panel {
+    min-height: 0;
+    padding-block: var(--space-6);
+  }
+
+  .canton__tarjeta {
+    padding: var(--space-5);
+  }
+
+  .canton__gastronomia-grid,
+  .canton__galeria,
+  .canton__stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

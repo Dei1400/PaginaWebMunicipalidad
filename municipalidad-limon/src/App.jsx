@@ -7,9 +7,11 @@ import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
 import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
 import Servicios from './features/servicios/Servicios';
+import Canton from './features/canton/Canton';
+import Municipalidad from './features/municipalidad/Municipalidad';
 
-function Municipalidad() {
-  return <h1>Municipalidad</h1>;
+function Servicios() {
+  return <h1>Servicios</h1>;
 }
 
 
@@ -28,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/tramites" element={<Tramites />} />
+        <Route path="/tramites/:categoryId" element={<Tramites />} />
         <Route path="/municipalidad" element={<Municipalidad />} />
         <Route path="/transparencia" element={<Transparencia />} />
         <Route
@@ -39,6 +42,7 @@ function App() {
           element={<StatusPage variant="error" />}
         />
         <Route path="/gobierno-municipal" element={<GobiernoMunicipal />} />
+        <Route path="/canton" element={<Canton />} />
         <Route path="/noticias" element={<Noticias />} />
         <Route path="/contacto" element={<Contacto />} />
       </Routes>
