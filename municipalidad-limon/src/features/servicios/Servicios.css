@@ -233,6 +233,8 @@
 }
 
 .servicios__card {
+  --service-color: var(--color-primary);
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 190px;
@@ -247,8 +249,18 @@
     transform 150ms ease;
 }
 
+.servicios__card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--service-color);
+  content: '';
+}
+
 .servicios__card:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--service-color);
   box-shadow: 0 9px 20px rgb(0 0 0 / 24%);
   transform: translateY(-2px);
 }
@@ -257,15 +269,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin-bottom: var(--space-3);
-  color: var(--color-primary);
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--service-color) 38%, white);
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--service-color) 12%, white);
+  color: var(--service-color);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
 }
 
 .servicios svg {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;

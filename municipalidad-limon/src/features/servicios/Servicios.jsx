@@ -218,7 +218,10 @@ function Servicios() {
           {visibleServices.length > 0 ? (
             <div className="servicios__grid">
               {visibleServices.map((service) => (
-                <article key={service.id} className="servicios__card">
+                <article
+                  key={service.id}
+                  className={`servicios__card servicios__card--${service.id}`}
+                >
                   <span className="servicios__card-icon">{icons[service.id]}</span>
                   <div className="servicios__card-body">
                     <h2 className="servicios__card-title">{service.title}</h2>
