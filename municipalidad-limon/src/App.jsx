@@ -29,6 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
         <Route path="/tramites" element={<Tramites />} />
+        <Route path="/tramites/:categoryId" element={<Tramites />} />
         <Route path="/municipalidad" element={<Municipalidad />} />
         <Route path="/transparencia" element={<Transparencia />} />
         <Route
