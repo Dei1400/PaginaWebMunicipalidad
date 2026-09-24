@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Link from '../../components/ui/Link';
 import heroBg from '../../../public/images/hero.jpeg';
@@ -110,10 +111,213 @@ const quickLinks = [
   { to: '/municipalidad',           icon: <IconContacto />,    label: 'Contacto' },
 ];
 
+const navSearchOptions = [
+  { label: 'Inicio', description: 'Página principal de la Municipalidad de Limón.', path: '/', keywords: ['home', 'principal'] },
+  { label: 'Servicios', description: 'Servicios municipales por área de atención.', path: '/servicios', keywords: ['programas', 'areas municipales'] },
+  { label: 'Trámites', description: 'Guía de trámites, pagos, patentes y formularios.', path: '/tramites', keywords: ['pagos', 'patentes', 'formularios', 'permisos'] },
+  { label: 'Gobierno Municipal', description: 'Información del Concejo, alcaldía y organización municipal.', path: '/gobierno-municipal', keywords: ['concejo', 'alcaldia', 'comision'] },
+  { label: 'Municipalidad', description: 'Contacto, atención ciudadana e información institucional.', path: '/municipalidad', keywords: ['contacto', 'telefono', 'horario'] },
+  { label: 'Cantón', description: 'Historia, distritos y datos del cantón de Limón.', path: '/canton', keywords: ['historia', 'distritos', 'mapa'] },
+  { label: 'Transparencia', description: 'Presupuesto, auditoría, planes y rendición de cuentas.', path: '/transparencia', keywords: ['presupuesto', 'auditoria', 'plan', 'rendicion'] },
+];
+
+const placeholderOptions = [
+  'Buscar pagos municipales',
+  'Buscar patentes',
+  'Buscar recolección',
+  'Buscar presupuesto',
+  'Buscar contacto',
+  'Buscar actividades culturales',
+];
+
+function normalizeSearch(value) {
+  return value
+    .toLocaleLowerCase('es')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+function getInitialMotionPreference() {
+  return typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
+}
+
+function HighlightedText({ text, query }) {
+  const normalizedText = normalizeSearch(text);
+  const normalizedQuery = normalizeSearch(query.trim());
+  const matchIndex = normalizedQuery ? normalizedText.indexOf(normalizedQuery) : -1;
+
+  if (matchIndex === -1) {
+    return text;
+  }
+
+  const matchEnd = matchIndex + normalizedQuery.length;
+
+  return (
+    <>
+      {text.slice(0, matchIndex)}
+      <mark>{text.slice(matchIndex, matchEnd)}</mark>
+      {text.slice(matchEnd)}
+    </>
+  );
+}
+
+function buildSearchOptions() {
+  const serviceOptions = services.map((service) => ({
+    label: service.title,
+    description: service.description,
+    path: '/servicios',
+    keywords: ['servicio', service.title, service.description],
+  }));
+
+  const quickLinkOptions = quickLinks.map((link) => ({
+    label: link.label,
+    description: 'Acceso rápido a una sección frecuente del sitio.',
+    path: link.to,
+    keywords: ['acceso rapido', link.label],
+  }));
+
+  const newsOptions = newsItems.slice(0, 4).map((item) => ({
+    label: item.title,
+    description: item.date,
+    path: '/noticias',
+    keywords: ['noticia', 'aviso', item.title, item.description],
+  }));
+
+  return [...navSearchOptions, ...quickLinkOptions, ...serviceOptions, ...newsOptions];
+}
+
 /* ──────────────────────────────────────────────────────── */
 
 function Home() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('noticias');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [typedPlaceholder, setTypedPlaceholder] = useState('');
+  const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
+  const [activeSearchOptionIndex, setActiveSearchOptionIndex] = useState(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getInitialMotionPreference);
+
+  const searchOptions = useMemo(() => buildSearchOptions(), []);
+  const normalizedSearchQuery = normalizeSearch(searchQuery.trim());
+  const visibleSearchOptions = useMemo(() => {
+    if (!normalizedSearchQuery) {
+      return searchOptions.slice(0, 6);
+    }
+
+    return searchOptions
+      .filter((option) => {
+        const content = [option.label, option.description, ...option.keywords].join(' ');
+        return normalizeSearch(content).includes(normalizedSearchQuery);
+      })
+      .slice(0, 6);
+  }, [normalizedSearchQuery, searchOptions]);
+
+  const hasSearchQuery = searchQuery.trim().length > 0;
+  const showSearchSuggestions =
+    isSearchFocused && hasSearchQuery && visibleSearchOptions.length > 0;
+  const showNoSearchResults =
+    isSearchFocused && hasSearchQuery && visibleSearchOptions.length === 0;
+  const showSearchPanel = showSearchSuggestions || showNoSearchResults;
+  const activeSearchOption = showSearchSuggestions
+    ? visibleSearchOptions[Math.min(activeSearchOptionIndex, visibleSearchOptions.length - 1)]
+    : undefined;
+  const animatedPlaceholder = prefersReducedMotion
+    ? placeholderOptions[placeholderIndex]
+    : typedPlaceholder;
+
+  useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function handleMotionPreferenceChange(event) {
+      setPrefersReducedMotion(event.matches);
+    }
+
+    motionQuery.addEventListener('change', handleMotionPreferenceChange);
+
+    return () => motionQuery.removeEventListener('change', handleMotionPreferenceChange);
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery || prefersReducedMotion) {
+      return undefined;
+    }
+
+    const currentPlaceholder = placeholderOptions[placeholderIndex];
+    const isComplete = typedPlaceholder.length === currentPlaceholder.length;
+    const isDeleted = typedPlaceholder.length === 0;
+    const timeout = window.setTimeout(
+      () => {
+        if (!isDeletingPlaceholder && isComplete) {
+          setIsDeletingPlaceholder(true);
+          return;
+        }
+
+        if (isDeletingPlaceholder && isDeleted) {
+          setIsDeletingPlaceholder(false);
+          setPlaceholderIndex((currentIndex) => (currentIndex + 1) % placeholderOptions.length);
+          return;
+        }
+
+        const nextLength = isDeletingPlaceholder
+          ? typedPlaceholder.length - 1
+          : typedPlaceholder.length + 1;
+
+        setTypedPlaceholder(currentPlaceholder.slice(0, nextLength));
+      },
+      !isDeletingPlaceholder && isComplete ? 1200 : isDeletingPlaceholder ? 35 : 70,
+    );
+
+    return () => window.clearTimeout(timeout);
+  }, [isDeletingPlaceholder, placeholderIndex, prefersReducedMotion, searchQuery, typedPlaceholder]);
+
+  function goToSearchOption(option) {
+    setSearchQuery(option.label);
+    setIsSearchFocused(false);
+    navigate(option.path);
+  }
+
+  function updateSearchQuery(value) {
+    setSearchQuery(value);
+    setIsSearchFocused(true);
+    setActiveSearchOptionIndex(0);
+  }
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+
+    if (activeSearchOption) {
+      goToSearchOption(activeSearchOption);
+    }
+  }
+
+  function handleSearchKeyDown(event) {
+    if (event.key === 'Escape') {
+      setIsSearchFocused(false);
+      return;
+    }
+
+    if (!showSearchSuggestions) {
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveSearchOptionIndex((currentIndex) =>
+        currentIndex + 1 >= visibleSearchOptions.length ? 0 : currentIndex + 1,
+      );
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveSearchOptionIndex((currentIndex) =>
+        currentIndex - 1 < 0 ? visibleSearchOptions.length - 1 : currentIndex - 1,
+      );
+    }
+  }
 
   return (
     <div className="home">
@@ -138,7 +342,7 @@ function Home() {
 
 
               {/* Buscador */}
-              <form className="home__search" onSubmit={(e) => e.preventDefault()}>
+              <form className="home__search" onSubmit={handleSearchSubmit} role="search">
                 <label htmlFor="home-search" className="home__search-label">
                   Buscar en el sitio
                 </label>
@@ -146,9 +350,61 @@ function Home() {
                   <input
                     id="home-search"
                     type="search"
-                    placeholder="¿Qué necesita encontrar?"
+                    value={searchQuery}
+                    onBlur={() => window.setTimeout(() => setIsSearchFocused(false), 120)}
+                    onChange={(event) => updateSearchQuery(event.target.value)}
+                    onFocus={() => setIsSearchFocused(true)}
+                    onKeyDown={handleSearchKeyDown}
+                    placeholder={animatedPlaceholder}
+                    autoComplete="off"
+                    aria-autocomplete="list"
+                    aria-controls="home-search-suggestions"
+                    aria-expanded={showSearchPanel}
+                    aria-activedescendant={
+                      activeSearchOption
+                        ? `home-search-suggestion-${activeSearchOptionIndex}`
+                        : undefined
+                    }
                   />
                   <button type="submit">Buscar</button>
+                </div>
+                <div
+                  id="home-search-suggestions"
+                  className={`home__search-suggestions${
+                    showSearchPanel ? ' home__search-suggestions--visible' : ''
+                  }`}
+                  role="listbox"
+                  aria-label="Sugerencias de búsqueda"
+                >
+                  {showSearchSuggestions &&
+                    visibleSearchOptions.map((option, optionIndex) => (
+                      <button
+                        key={`${option.path}-${option.label}`}
+                        id={`home-search-suggestion-${optionIndex}`}
+                        type="button"
+                        className={`home__search-suggestion${
+                          optionIndex === activeSearchOptionIndex
+                            ? ' home__search-suggestion--active'
+                            : ''
+                        }`}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onClick={() => goToSearchOption(option)}
+                        role="option"
+                        aria-selected={optionIndex === activeSearchOptionIndex}
+                      >
+                        <span className="home__search-suggestion-title">
+                          <HighlightedText text={option.label} query={searchQuery} />
+                        </span>
+                        <span className="home__search-suggestion-description">
+                          <HighlightedText text={option.description} query={searchQuery} />
+                        </span>
+                      </button>
+                    ))}
+                  {showNoSearchResults && (
+                    <p className="home__search-empty" role="status">
+                      No encontramos coincidencias. Intente con otra palabra.
+                    </p>
+                  )}
                 </div>
               </form>
             </div>
