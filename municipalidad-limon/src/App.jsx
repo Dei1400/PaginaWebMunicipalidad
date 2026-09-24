@@ -7,13 +7,10 @@ import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
 import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
 import Canton from './features/canton/Canton';
+import Municipalidad from './features/municipalidad/Municipalidad';
 
 function Servicios() {
   return <h1>Servicios</h1>;
-}
-
-function Municipalidad() {
-  return <h1>Municipalidad</h1>;
 }
 
 
