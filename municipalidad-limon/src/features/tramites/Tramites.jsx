@@ -1,8 +1,8 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import PageHeader from '../../components/common/PageHeader';
-import Button from '../../components/ui/Button';
-import Input from '../../components/ui/Input';
+import heroBg from '../../../public/images/hero.jpeg';
+import municipalLogo from '../../assets/logo.svg';
+import Breadcrumb from '../../components/common/Breadcrumb';
 import Link from '../../components/ui/Link';
 import './Tramites.css';
 
@@ -27,6 +27,8 @@ const tramiteCategories = [
     office: 'Área de Rentas y Patentes',
     contact: 'rentas@municlimon.go.cr · 2758-7220 / 2758-4444 ext. 112',
     contactHref: 'mailto:rentas@municlimon.go.cr',
+    channel: 'Orientación municipal',
+    primaryAction: 'Consultar requisitos',
     resources: [
       {
         title: 'Solicitud de patente comercial',
@@ -63,6 +65,8 @@ const tramiteCategories = [
     office: 'Departamento de Cobros',
     contact: 'cobros@municlimon.go.cr · 2758-4444 / 2798-1101',
     contactHref: 'mailto:cobros@municlimon.go.cr',
+    channel: 'Sistema externo',
+    primaryAction: 'Consultar pendientes',
     resources: [
       {
         title: 'Consulta de pendientes de cobro',
@@ -105,6 +109,8 @@ const tramiteCategories = [
     office: 'Catastro y Bienes Inmuebles',
     contact: '2758-4444 · Catastro ext. 215 · Bienes Inmuebles ext. 208 o 209',
     contactHref: 'tel:+50627584444',
+    channel: 'Atención especializada',
+    primaryAction: 'Revisar documentos',
     resources: [
       {
         title: 'Solicitud de uso de suelo',
@@ -145,6 +151,8 @@ const tramiteCategories = [
     office: 'Unidad de Zona Marítimo Terrestre',
     contact: '2758-4444',
     contactHref: 'tel:+50627584444',
+    channel: 'Atención especializada',
+    primaryAction: 'Consultar concesión',
     resources: [
       {
         title: 'Solicitud de concesión',
@@ -179,6 +187,8 @@ const tramiteCategories = [
     office: 'Unidad de Mercado y Plazas',
     contact: '2798-2682',
     contactHref: 'tel:+50627982682',
+    channel: 'Atención presencial',
+    primaryAction: 'Solicitar orientación',
     resources: [
       {
         title: 'Solicitud de alquiler de un local',
@@ -213,6 +223,8 @@ const tramiteCategories = [
     office: 'Ventanilla Única Municipal',
     contact: 'ventanilla.unica@municlimon.go.cr · 2758-4444',
     contactHref: 'mailto:ventanilla.unica@municlimon.go.cr',
+    channel: 'Formularios',
+    primaryAction: 'Ver formularios',
     resources: [
       {
         title: 'Formularios de patentes',
@@ -364,6 +376,8 @@ function Tramites() {
         category.description,
         category.office,
         category.contact,
+        category.channel,
+        category.primaryAction,
         ...category.actions,
         ...category.requirements,
         ...category.resources.flatMap((resource) => [
@@ -404,43 +418,69 @@ function Tramites() {
   }
 
   return (
-    <div className="tramites">
-      <PageHeader
-        title="Trámites"
-        description="Encuentre la información, los requisitos y la orientación necesaria para realizar sus gestiones municipales."
-        breadcrumbItems={[{ label: 'Trámites' }]}
-      />
+    <main className="tramites">
+      <section className="tramites__hero" style={{ backgroundImage: `url(${heroBg})` }}>
+        <div className="tramites__hero-overlay">
+          <div className="container">
+            <div className="tramites__hero-content">
+              <div className="tramites__brand">
+                <div className="tramites__brand-mark" aria-hidden="true">
+                  <img src={municipalLogo} alt="" />
+                </div>
+                <div className="tramites__brand-name">
+                  <strong>Municipalidad de Limón</strong>
+                </div>
+              </div>
 
-      <section className="tramites__search-section">
-        <div className="container tramites__search-layout">
-          <div className="tramites__intro">
-            <p className="tramites__eyebrow">Atención ciudadana</p>
-            <h2>¿Qué trámite necesita realizar?</h2>
-            <p>
-              Reunimos gestiones que antes estaban distribuidas entre distintas
-              dependencias para que pueda identificar qué necesita, qué debe
-              preparar y dónde solicitar ayuda.
+              <form
+                className="tramites__hero-search"
+                onSubmit={handleSearchSubmit}
+                role="search"
+              >
+                <label htmlFor={searchId} className="tramites__search-label">
+                  Buscar trámites municipales
+                </label>
+                <input
+                  id={searchId}
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="¿Qué trámite necesita encontrar?"
+                />
+                <button type="submit">Buscar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="tramites__categories-section"
+        aria-labelledby="tramites-categories-title"
+      >
+        <div className="container tramites__catalog-container">
+          <Breadcrumb items={[{ label: 'Trámites' }]} />
+
+          <div className="tramites__section-heading">
+            <div>
+              <h1
+                id="tramites-categories-title"
+                ref={categoriesHeadingRef}
+                tabIndex="-1"
+              >
+                Trámites municipales
+              </h1>
+              <p>
+                Encuentre la gestión que necesita, revise los requisitos y
+                confirme el canal de atención correspondiente.
+              </p>
+            </div>
+            <p className="tramites__results" aria-live="polite">
+              {visibleCategories.length === 1
+                ? '1 categoría encontrada'
+                : `${visibleCategories.length} categorías encontradas`}
             </p>
           </div>
-
-          <form
-            className="tramites__search-form"
-            onSubmit={handleSearchSubmit}
-            role="search"
-          >
-            <Input
-              id={searchId}
-              label="Buscar un trámite"
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Ejemplo: patente, pago o catastro"
-              helperText="Los resultados se actualizan mientras escribe. La búsqueda no distingue tildes."
-            />
-            <Button type="submit" className="tramites__search-button">
-              Ver resultados
-            </Button>
-          </form>
 
           {query && (
             <button
@@ -451,31 +491,6 @@ function Tramites() {
               Limpiar búsqueda
             </button>
           )}
-        </div>
-      </section>
-
-      <section
-        className="section tramites__categories-section"
-        aria-labelledby="tramites-categories-title"
-      >
-        <div className="container">
-          <div className="tramites__section-heading">
-            <div>
-              <p className="tramites__eyebrow">Categorías</p>
-              <h2
-                id="tramites-categories-title"
-                ref={categoriesHeadingRef}
-                tabIndex="-1"
-              >
-                Explore los trámites por tema
-              </h2>
-            </div>
-            <p className="tramites__results" aria-live="polite">
-              {visibleCategories.length === 1
-                ? '1 categoría encontrada'
-                : `${visibleCategories.length} categorías encontradas`}
-            </p>
-          </div>
 
           {visibleCategories.length > 0 ? (
             <div className="tramites__category-grid">
@@ -501,6 +516,14 @@ function Tramites() {
                       <span className="tramites__category-title">
                         {category.title}
                       </span>
+                      <span className="tramites__category-meta">
+                        <span>{category.channel}</span>
+                        {isSelected && (
+                          <span className="tramites__selected-label">
+                            Categoría activa
+                          </span>
+                        )}
+                      </span>
                       <span className="tramites__category-description">
                         {category.description}
                       </span>
@@ -523,9 +546,24 @@ function Tramites() {
                   Pruebe con una palabra más general, como “pago”, “propiedad”
                   o “formulario”.
                 </p>
-                <Button type="button" variant="tertiary" onClick={clearSearch}>
+                <div className="tramites__empty-suggestions" aria-label="Búsquedas sugeridas">
+                  <button type="button" onClick={() => setQuery('pago')}>
+                    Pago
+                  </button>
+                  <button type="button" onClick={() => setQuery('patente')}>
+                    Patente
+                  </button>
+                  <button type="button" onClick={() => setQuery('formulario')}>
+                    Formulario
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  className="tramites__empty-button"
+                  onClick={clearSearch}
+                >
                   Ver todas las categorías
-                </Button>
+                </button>
               </div>
             </div>
           )}
@@ -537,6 +575,7 @@ function Tramites() {
           id="tramite-detail-panel"
           className="tramites__detail-section"
           aria-labelledby="tramite-detail-title"
+          aria-live="polite"
         >
           <div className="container">
             <div className="tramites__detail">
@@ -562,6 +601,27 @@ function Tramites() {
                   </div>
                 </div>
                 <p>{selectedCategory.description}</p>
+              </div>
+
+              <div className="tramites__summary-strip" aria-label="Resumen del trámite seleccionado">
+                <div>
+                  <span>Canal</span>
+                  <strong>{selectedCategory.channel}</strong>
+                </div>
+                <div>
+                  <span>Área responsable</span>
+                  <strong>{selectedCategory.office}</strong>
+                </div>
+                <div>
+                  <span>Acción recomendada</span>
+                  <strong>{selectedCategory.primaryAction}</strong>
+                </div>
+                <Link
+                  href={selectedCategory.contactHref}
+                  className="tramites__primary-action"
+                >
+                  {selectedCategory.primaryAction}
+                </Link>
               </div>
 
               <div className="tramites__detail-grid">
@@ -687,7 +747,7 @@ function Tramites() {
           </ol>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
 
