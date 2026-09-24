@@ -10,7 +10,7 @@ import Servicios from './features/servicios/Servicios';
 import Canton from './features/canton/Canton';
 import Municipalidad from './features/municipalidad/Municipalidad';
 
-function Servicios() {
+function Servicio() {
   return <h1>Servicios</h1>;
 }
 
