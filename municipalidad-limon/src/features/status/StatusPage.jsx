@@ -53,6 +53,8 @@ function StatusPage({ variant = 'construction' }) {
   const location = useLocation();
   const content = statusContent[variant] || statusContent.construction;
   const resourceTitle = location.state?.resourceTitle;
+  const returnTo = location.state?.returnTo || '/transparencia';
+  const returnLabel = location.state?.returnLabel || 'Volver a Transparencia';
 
   return (
     <div className={`status-page status-page--${variant}`}>
@@ -77,10 +79,10 @@ function StatusPage({ variant = 'construction' }) {
 
               <div className="status-page__actions">
                 <Link
-                  to="/transparencia"
+                  to={returnTo}
                   className="status-page__action status-page__action--primary"
                 >
-                  Volver a Transparencia
+                  {returnLabel}
                 </Link>
                 <Link
                   to="/"
