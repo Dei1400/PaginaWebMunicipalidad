@@ -6,6 +6,7 @@ import StatusPage from './features/status/StatusPage';
 import Tramites from './features/tramites/Tramites';
 import Transparencia from './features/transparencia/Transparencia';
 import GobiernoMunicipal from './features/gobierno-municipal/GobiernoMunicipal';
+import Servicios from './features/servicios/Servicios';
 import Canton from './features/canton/Canton';
 import Municipalidad from './features/municipalidad/Municipalidad';
 
