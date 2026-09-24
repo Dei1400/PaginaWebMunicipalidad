@@ -55,7 +55,6 @@
 
 .canton__panel {
   position: relative;
-  min-height: 560px;
   display: flex;
   align-items: center;
   padding-block: var(--space-9);
@@ -71,16 +70,11 @@
 .canton__panel--support { background-color: var(--color-support); }
 
 .canton__tarjeta {
-  max-width: 560px;
+  width: 100%;
   padding: var(--space-7);
   border-radius: var(--radius-lg);
   background-color: rgb(255 255 255 / 94%);
   box-shadow: 0 6px 18px rgb(0 0 0 / 25%);
-}
-
-.canton__tarjeta--ancha {
-  max-width: 100%;
-  width: 100%;
 }
 
 .canton__tarjeta h2 {

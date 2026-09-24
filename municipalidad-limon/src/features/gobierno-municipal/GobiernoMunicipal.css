@@ -404,7 +404,11 @@
   }
 
   .gobierno__folder-body {
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
+    width: 100%;
+    padding: var(--space-7);
+    border: 2px solid var(--color-border);
+    border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+    background-color: var(--color-white);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 20%);
   }
 }
