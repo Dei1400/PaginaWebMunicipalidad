@@ -22,7 +22,7 @@ const icons = {
       <path d="M5 21h14" />
     </svg>
   ),
-  social: (
+  'desarrollo-social': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
       <circle cx="9.5" cy="7" r="4" />
@@ -30,7 +30,7 @@ const icons = {
       <path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   ),
-  empleo: (
+  'empleo-emprendimiento': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <rect x="3" y="7" width="18" height="13" rx="2" />
       <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
@@ -38,20 +38,20 @@ const icons = {
       <path d="M12 12v2" />
     </svg>
   ),
-  educacion: (
+  'educacion-cultura-deporte': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="m3 10 9-5 9 5-9 5-9-5Z" />
       <path d="M7 12v5c3 2 7 2 10 0v-5" />
       <path d="M21 10v6" />
     </svg>
   ),
-  seguridad: (
+  'seguridad-convivencia': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
       <path d="m9 12 2 2 4-5" />
     </svg>
   ),
-  comercio: (
+  'comercio-economia': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 10h16l-1-6H5l-1 6Z" />
       <path d="M6 10v10h12V10" />
@@ -59,7 +59,7 @@ const icons = {
       <path d="M4 10a4 4 0 0 0 8 0 4 4 0 0 0 8 0" />
     </svg>
   ),
-  atencion: (
+  'atencion-ciudadana': (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M4 18v-1a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v1" />
       <circle cx="12" cy="7" r="4" />
