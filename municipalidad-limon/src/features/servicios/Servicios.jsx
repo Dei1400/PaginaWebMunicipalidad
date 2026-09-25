@@ -1,6 +1,6 @@
 import { useId, useMemo, useState } from 'react';
 import heroBg from '../../../public/images/hero.jpeg';
-import municipalLogo from '../../assets/logo.svg';
+import municipalLogo from '../../assets/limon-ciudad-de-la-vida.svg';
 import Breadcrumb from '../../components/common/Breadcrumb';
 import './Servicios.css';
 
@@ -165,12 +165,11 @@ function Servicios() {
           <div className="container">
             <div className="servicios__hero-content">
               <div className="servicios__brand">
-                <div className="servicios__brand-mark" aria-hidden="true">
-                  <img src={municipalLogo} alt="" />
-                </div>
-                <div className="servicios__brand-name">
-                  <strong>Municipalidad de Limón</strong>
-                </div>
+                <img
+                  className="servicios__brand-image"
+                  src={municipalLogo}
+                  alt="Limón, ciudad de la vida"
+                />
               </div>
 
               <form className="servicios__hero-search" onSubmit={handleSubmit} role="search">

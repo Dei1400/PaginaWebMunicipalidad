@@ -1,7 +1,7 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import heroBg from '../../../public/images/hero.jpeg';
-import municipalLogo from '../../assets/logo.svg';
+import municipalLogo from '../../assets/limon-ciudad-de-la-vida.svg';
 import Breadcrumb from '../../components/common/Breadcrumb';
 import Link from '../../components/ui/Link';
 import './Tramites.css';
@@ -424,12 +424,11 @@ function Tramites() {
           <div className="container">
             <div className="tramites__hero-content">
               <div className="tramites__brand">
-                <div className="tramites__brand-mark" aria-hidden="true">
-                  <img src={municipalLogo} alt="" />
-                </div>
-                <div className="tramites__brand-name">
-                  <strong>Municipalidad de Limón</strong>
-                </div>
+                <img
+                  className="tramites__brand-image"
+                  src={municipalLogo}
+                  alt="Limón, ciudad de la vida"
+                />
               </div>
 
               <form

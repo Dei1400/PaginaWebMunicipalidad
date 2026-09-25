@@ -49,12 +49,17 @@ function StatusIllustration({ variant }) {
   );
 }
 
-function StatusPage({ variant = 'construction' }) {
+function StatusPage({
+  variant = 'construction',
+  resourceTitle: resourceTitleProp,
+  returnTo: returnToProp,
+  returnLabel: returnLabelProp,
+}) {
   const location = useLocation();
   const content = statusContent[variant] || statusContent.construction;
-  const resourceTitle = location.state?.resourceTitle;
-  const returnTo = location.state?.returnTo || '/transparencia';
-  const returnLabel = location.state?.returnLabel || 'Volver a Transparencia';
+  const resourceTitle = resourceTitleProp || location.state?.resourceTitle;
+  const returnTo = returnToProp || location.state?.returnTo || '/transparencia';
+  const returnLabel = returnLabelProp || location.state?.returnLabel || 'Volver a Transparencia';
 
   return (
     <div className={`status-page status-page--${variant}`}>

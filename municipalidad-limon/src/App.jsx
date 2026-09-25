@@ -10,15 +10,6 @@ import Servicios from './features/servicios/Servicios';
 import Canton from './features/canton/Canton';
 import Municipalidad from './features/municipalidad/Municipalidad';
 
-
-function Noticias() {
-  return <h1>Noticias</h1>;
-}
-
-function Contacto() {
-  return <h1>Contacto</h1>;
-}
-
 function App() {
   return (
     <Layout>  
@@ -39,8 +30,28 @@ function App() {
         />
         <Route path="/gobierno-municipal" element={<GobiernoMunicipal />} />
         <Route path="/canton" element={<Canton />} />
-        <Route path="/noticias" element={<Noticias />} />
-        <Route path="/contacto" element={<Contacto />} />
+        <Route
+          path="/noticias"
+          element={
+            <StatusPage
+              variant="construction"
+              resourceTitle="Noticias"
+              returnTo="/"
+              returnLabel="Volver al inicio"
+            />
+          }
+        />
+        <Route
+          path="/contacto"
+          element={
+            <StatusPage
+              variant="construction"
+              resourceTitle="Contacto"
+              returnTo="/municipalidad"
+              returnLabel="Ver información municipal"
+            />
+          }
+        />
       </Routes>
     </Layout>
   );
