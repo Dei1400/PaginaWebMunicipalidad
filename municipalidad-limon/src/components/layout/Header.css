@@ -1,6 +1,11 @@
 .header {
-  background-color: var(--color-white);
-  border-bottom: var(--border-width) solid var(--color-border);
+  position: relative;
+  background-color: #063f16;
+  border-bottom: 0;
+}
+
+.header::before {
+  display: none;
 }
 
 .header__content {
@@ -17,7 +22,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--color-text);
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -31,11 +36,11 @@
 .header__brand-divider {
   width: 1px;
   height: 44px;
-  background-color: var(--color-border);
+  background-color: rgb(255 255 255 / 34%);
 }
 
 .header__title {
-  color: var(--color-black);
+  color: var(--color-white);
   font-family: var(--font-heading);
   font-size: var(--font-size-h3);
   font-weight: 700;
@@ -61,9 +66,9 @@
   width: 34px;
   height: 34px;
   padding: 0;
-  color: var(--color-text);
-  background-color: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
+  color: var(--color-white);
+  background-color: rgb(255 255 255 / 10%);
+  border: var(--border-width) solid rgb(255 255 255 / 24%);
   border-radius: 50%;
   font-family: var(--font-heading);
   font-size: 0.72rem;
@@ -77,9 +82,9 @@
 }
 
 .header__social-link:hover {
-  color: var(--color-white);
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: var(--color-black);
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
 }
 
 .header__social-link svg {
@@ -96,12 +101,12 @@
 }
 
 .header__social-icon-cutout {
-  fill: var(--color-surface);
+  fill: #063f16;
   stroke: none;
 }
 
 .header__social-link:hover .header__social-icon-cutout {
-  fill: var(--color-primary);
+  fill: var(--color-secondary);
 }
 
 .header__social-link .link__external-icon {
@@ -112,7 +117,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-text);
+  color: var(--color-white);
   text-decoration: none;
 }
 
@@ -122,11 +127,17 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  color: var(--color-white);
-  background-color: var(--color-primary);
+  color: var(--color-black);
+  background-color: var(--color-secondary);
   border-radius: 50%;
-  font-size: 1rem;
   line-height: 1;
+}
+
+.header__phone-icon svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
 }
 
 .header__phone-text {
@@ -136,21 +147,21 @@
 }
 
 .header__phone-label {
-  color: var(--color-text-secondary);
+  color: rgb(255 255 255 / 72%);
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
 }
 
 .header__phone-number {
-  color: var(--color-text);
+  color: var(--color-white);
   font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 800;
 }
 
 .header__phone:hover .header__phone-number {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 @media (max-width: 768px) {

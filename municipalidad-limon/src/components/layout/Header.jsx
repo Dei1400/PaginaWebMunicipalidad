@@ -37,6 +37,12 @@ const IconLocation = () => (
   </svg>
 );
 
+const IconPhone = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7.2 4.8 5.6 6.4c-.7.7-.9 1.8-.5 2.7 1.9 4.6 5.2 7.9 9.8 9.8.9.4 2 .2 2.7-.5l1.6-1.6c.5-.5.5-1.3.1-1.8l-2.1-2.3c-.4-.5-1.1-.6-1.7-.3l-1.8.9a10.6 10.6 0 0 1-3-3l.9-1.8c.3-.6.2-1.3-.3-1.7L9 4.7c-.5-.4-1.3-.4-1.8.1Z" />
+  </svg>
+);
+
 const socialLinks = [
   {
     label: 'Facebook',
@@ -106,7 +112,9 @@ function Header() {
               href="tel:+50627584444"
               className="header__phone"
             >
-              <span className="header__phone-icon" aria-hidden="true">☎</span>
+              <span className="header__phone-icon" aria-hidden="true">
+                <IconPhone />
+              </span>
               <span className="header__phone-text">
                 <span className="header__phone-label">Atención ciudadana</span>
                 <span className="header__phone-number">2758-4444</span>
