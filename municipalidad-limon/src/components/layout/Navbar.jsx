@@ -75,18 +75,6 @@ function Navbar() {
               </li>
             ))}
           </ul>
-
-          <NavLink
-            to="/contacto"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? 'navbar__cta navbar__cta--active'
-                : 'navbar__cta'
-            }
-          >
-            Atención ciudadana
-          </NavLink>
         </div>
       </Container>
     </nav>

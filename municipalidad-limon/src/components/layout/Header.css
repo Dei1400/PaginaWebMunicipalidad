@@ -28,6 +28,12 @@
   object-fit: contain;
 }
 
+.header__brand-divider {
+  width: 1px;
+  height: 44px;
+  background-color: var(--color-border);
+}
+
 .header__title {
   color: var(--color-black);
   font-family: var(--font-heading);
@@ -165,6 +171,10 @@
   .header__logo {
     width: 44px;
     height: 44px;
+  }
+
+  .header__brand-divider {
+    height: 38px;
   }
 
   .header__title {

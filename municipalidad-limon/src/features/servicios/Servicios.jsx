@@ -219,6 +219,7 @@ function Servicios() {
               {visibleServices.map((service) => (
                 <article
                   key={service.id}
+                  id={service.id}
                   className={`servicios__card servicios__card--${service.id}`}
                 >
                   <span className="servicios__card-icon">{icons[service.id]}</span>

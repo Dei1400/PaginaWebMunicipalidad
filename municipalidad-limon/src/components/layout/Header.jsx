@@ -1,6 +1,6 @@
 import Container from '../ui/Container';
 import Link from '../ui/Link';
-import municipalLogo from '../../assets/logo-municipalidad-limón.jpg';
+import municipalLogo from '../../assets/logo-municipalidad-limón.png';
 import './Header.css';
 
 const IconFacebook = () => (
@@ -81,6 +81,7 @@ function Header() {
               alt=""
               aria-hidden="true"
             />
+            <span className="header__brand-divider" aria-hidden="true" />
             <span className="header__title">
               Municipalidad de Limón
             </span>

@@ -1,4 +1,5 @@
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import PageHeader from '../../components/common/PageHeader';
 import Input from '../../components/ui/Input';
 import Link from '../../components/ui/Link';
@@ -402,6 +403,7 @@ function getDocumentAriaLabel(document) {
 }
 
 function Transparencia() {
+  const location = useLocation();
   const searchId = useId();
   const categorySelectId = useId();
   const [selectedCategoryId, setSelectedCategoryId] = useState(
@@ -442,6 +444,14 @@ function Transparencia() {
       return searchableContent.includes(normalizedQuery);
     });
   }, [normalizedQuery]);
+
+  useEffect(() => {
+    const hashCategoryId = decodeURIComponent(location.hash.replace('#', ''));
+
+    if (categoryById.has(hashCategoryId)) {
+      setSelectedCategoryId(hashCategoryId);
+    }
+  }, [location.hash]);
 
   return (
     <div className="transparency">
